@@ -114,12 +114,21 @@ function addOption(question: Question): void {
 <div
   v-for="section in sections"
   :key="section.id"
-  class="bg-white rounded-xl shadow-sm p-6"
+  class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500"
 >
   <input
     v-model="section.title"
-    class="text-2xl font-semibold outline-none"
+    class="text-2xl font-semibold outline-none mb-2"
   >
+
+  <p class="text-sm text-gray-500">
+    Questions in this section:
+    {{
+      questions.filter(
+        q => q.sectionId === section.id
+      ).length
+    }}
+  </p>
 </div>
       <!-- Questions -->
       <div
@@ -128,29 +137,46 @@ function addOption(question: Question): void {
         class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-600"
         @click="selectedQuestionId = question.id"
       >
-        <!-- Question Header -->
-        <div class="flex gap-4 mb-6">
+      <!-- Question Header -->
+<div class="flex gap-4 mb-6">
 
-          <input
-            v-model="question.title"
-            class="flex-1 border-b border-gray-300 outline-none text-xl pb-2"
-          />
+  <input
+    v-model="question.title"
+    class="flex-1 border-b border-gray-300 outline-none text-xl pb-2"
+  />
 
-          <select
-            v-model="question.type"
-            class="border rounded-lg px-3 py-2"
-          >
-            <option>Short Answer</option>
-            <option>Paragraph</option>
-            <option>Multiple Choice</option>
-            <option>Checkboxes</option>
-            <option>Dropdown</option>
-            <option>Linear Scale</option>
-            <option>Date</option>
-            <option>Time</option>
-          </select>
+  <div class="flex flex-col gap-2">
 
-        </div>
+    <select
+      v-model="question.type"
+      class="border rounded-lg px-3 py-2"
+    >
+      <option>Short Answer</option>
+      <option>Paragraph</option>
+      <option>Multiple Choice</option>
+      <option>Checkboxes</option>
+      <option>Dropdown</option>
+      <option>Linear Scale</option>
+      <option>Date</option>
+      <option>Time</option>
+    </select>
+
+    <select
+      v-model="question.sectionId"
+      class="border rounded-lg px-3 py-2 text-sm"
+    >
+      <option
+        v-for="section in sections"
+        :key="section.id"
+        :value="section.id"
+      >
+        {{ section.title }}
+      </option>
+    </select>
+
+  </div>
+
+</div>
 
         <!-- Multiple Choice -->
         <div
