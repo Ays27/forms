@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
+import { useFormStore } from '~/stores/form'
+import { useMedia } from '~/composables/useMedia'
+import { storeToRefs } from 'pinia'
 import {
   PlusIcon,
   PhotoIcon,
@@ -10,77 +12,30 @@ import {
   PencilSquareIcon
 } from '@heroicons/vue/24/outline'
 
-type QuestionType =
-  | 'Short Answer'
-  | 'Paragraph'
-  | 'Multiple Choice'
-  | 'Checkboxes'
-  | 'Dropdown'
-  | 'Linear Scale'
-  | 'Date'
-  | 'Time'
-  | 'image'
-  | 'file upload'
-interface Option {
-  text: string
-  imageUrl?: string
-}
-interface Question {
-  id: number
-  title: string
-  type: QuestionType
-  required: boolean
-  options: Option[]
-  sectionId: number
-  goToSectionId?: number
+import type {
+  Question,
+  Section,
+  Option,
+  QuestionType
+} from  '~/types/form'
+const formStore = useFormStore()
 
-  imageUrl?: string
-  videoUrl?: string
-}
-interface Section {
-  id: number
-  title: string
-}
-const formTitle = defineModel<string>('formTitle', {
-  default: 'Untitled Form'
-})
+const { sections, questions, formTitle, formDescription, selectedQuestionId } = storeToRefs(formStore)
+const {
+  addQuestion,
+  addSection,
+  deleteQuestion,
+  duplicateQuestion,
+  addOption
+} = formStore
+const {
+  imageInput,
+  imageQuestionId,
+  imageOptionIndex,
+  showVideoInput,
+    openImagePicker
+} = useMedia()
 
-const formDescription = defineModel<string>('formDescription', {
-  default: 'Form description'
-})
-
-const selectedQuestionId = ref<number | null>(1)
-
-const showVideoInput = ref(false)
-const sections = ref<Section[]>([
-  {
-    id: 1,
-    title: 'Section 1'
-  }
-])
-const questions = ref<Question[]>([
-{
-  id: 1,
-  title: 'Untitled Question',
-  type: 'Multiple Choice',
-  required: false,
-  options: [
-  {
-    text: 'Option 1'
-  }
-],
-  sectionId: 1,
-  goToSectionId: undefined
-}
-  
-])
-const imageInput = ref<HTMLInputElement | null>(null)
-const imageQuestionId = ref<number | null>(null)
-const imageOptionIndex = ref<number | null>(null)
-function openImagePicker(): void {
-  imageQuestionId.value = selectedQuestionId.value
-  imageInput.value?.click()
-}
 function openOptionImagePicker(
   questionId: number,
   optionIndex: number
@@ -123,49 +78,8 @@ reader.onload = () => {
 
   reader.readAsDataURL(file)
 }
-function addQuestion(): void {
-const newQuestion: Question = {
-  id: Date.now(),
-  title: 'Untitled Question',
-  type: 'Multiple Choice',
-  required: false,
-  options: [
-  {
-    text: 'Option 1'
-  }
-],
-  sectionId: sections.value[sections.value.length - 1].id,
-  goToSectionId: undefined
-}
 
-  questions.value.push(newQuestion)
-  selectedQuestionId.value = newQuestion.id
-}
-function addSection(): void {
-  sections.value.push({
-    id: Date.now(),
-    title: `Section ${sections.value.length + 1}`
-  })
-}
 
-function deleteQuestion(id: number): void {
-  questions.value = questions.value.filter(
-    question => question.id !== id
-  )
-}
-
-function duplicateQuestion(question: Question): void {
-  questions.value.push({
-    ...structuredClone(question),
-    id: Date.now()
-  })
-}
-//options(changed it for image support)
-function addOption(question: Question): void {
-  question.options.push({
-    text: `Option ${question.options.length + 1}`
-  })
-}
 //image remove and change
 function removeImage(questionId: number): void {
   const question = questions.value.find(
@@ -813,10 +727,7 @@ function editVideo(questionId: number): void {
       </button>
 
 <button class="w-12 h-12 rounded-lg hover:bg-gray-100 flex items-center justify-center"
-  @click="() => {
-    if (selectedQuestionId === null) return
-    openImagePicker()
-  }"
+  @click="openImagePicker(selectedQuestionId)"
 >
   <PhotoIcon class="w-6 h-6" />
 </button>

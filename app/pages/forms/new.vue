@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Questions from '~/components/Questions.vue'
-
+import Preview from '~/components/Preview.vue'
+const isPreviewMode = ref(false)
 const formTitle = ref('Untitled Form')
 const formDescription = ref('Form description')
 
@@ -25,11 +26,12 @@ const activeTab = ref('Questions')
         <!-- Right -->
         <div class="flex items-center gap-2">
 
-          <UButton
-            icon="i-lucide-eye"
-            color="neutral"
-            variant="ghost"
-          />
+      <UButton
+  icon="i-lucide-eye"
+  color="neutral"
+  variant="ghost"
+  @click="isPreviewMode = !isPreviewMode"
+/>
 
           <UButton
             icon="i-lucide-undo-2"
@@ -109,11 +111,17 @@ const activeTab = ref('Questions')
     </nav>
 
     <!-- Page Content -->
-    <Questions
-      v-if="activeTab === 'Questions'"
-      v-model:form-title="formTitle"
-      v-model:form-description="formDescription"
-    />
+  <Questions
+  v-if="activeTab === 'Questions' && !isPreviewMode"
+  v-model:form-title="formTitle"
+  v-model:form-description="formDescription"
+/>
+
+<Preview
+  v-if="activeTab === 'Questions' && isPreviewMode"
+  :form-title="formTitle"
+  :form-description="formDescription"
+/>
 
   </div>
 </template>
