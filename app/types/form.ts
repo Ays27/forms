@@ -25,6 +25,7 @@ export interface Question {
   goToSectionId?: number
   imageUrl?: string
   videoUrl?: string
+  maxLength?: number
 }
 
 export interface Section {

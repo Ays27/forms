@@ -7,10 +7,19 @@ defineProps<{
 </script>
 
 <template>
-  <textarea
-    disabled
-    rows="4"
-    placeholder="Your answer"
-    class="w-full border rounded-lg p-3"
-  />
+  <div>
+    <textarea
+      rows="4"
+      :maxlength="question.maxLength"
+      placeholder="Your answer"
+      class="w-full border rounded-lg p-3"
+    />
+
+    <p
+      v-if="question.maxLength"
+      class="text-xs text-gray-500 mt-1"
+    >
+      Maximum {{ question.maxLength }} characters
+    </p>
+  </div>
 </template>

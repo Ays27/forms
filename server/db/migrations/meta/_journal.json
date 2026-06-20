@@ -15,6 +15,34 @@
       "when": 1781342559121,
       "tag": "0001_outstanding_epoch",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781525611719,
+      "tag": "0002_plain_karma",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1781866068537,
+      "tag": "0003_blue_speedball",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1781909322704,
+      "tag": "0004_marvelous_hammerhead",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1781915038281,
+      "tag": "0005_cheerful_spot",
+      "breakpoints": true
     }
   ]
 }

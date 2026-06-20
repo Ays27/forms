@@ -505,6 +505,26 @@ function editVideo(questionId: number): void {
             class="w-full border border-gray-300 rounded-lg p-3 outline-none"
           />
         </div>
+        <!-- Character Limit -->
+<div
+  v-if="
+    question.type === 'Short Answer' ||
+    question.type === 'Paragraph'
+  "
+  class="mt-3"
+>
+  <label class="block text-sm text-gray-600 mb-1">
+    Character Limit
+  </label>
+
+  <input
+    v-model.number="question.maxLength"
+    type="number"
+    min="1"
+    placeholder="No limit"
+    class="border border-gray-300 rounded px-2 py-1 w-40"
+  >
+</div>
 
         <!-- Linear Scale -->
         <div
@@ -688,7 +708,10 @@ function editVideo(questionId: number): void {
 
             <button
               class="text-blue-500 text-sm"
-              @click="duplicateQuestion(question)"
+              @click="
+  console.log('duplicate clicked');
+  duplicateQuestion(question)
+"
             >
               Duplicate
             </button>
@@ -718,13 +741,13 @@ function editVideo(questionId: number): void {
        <PlusIcon class="w-6 h-6" />
       </button>
 
-      <button class="w-12 h-12 rounded-lg hover:bg-gray-100">
+      <!--button class="w-12 h-12 rounded-lg hover:bg-gray-100">
         📥
-      </button>
+      </button-->
 
-      <button class="w-12 h-12 rounded-lg hover:bg-gray-100">
+      <!--button class="w-12 h-12 rounded-lg hover:bg-gray-100">
         📝
-      </button>
+      </button-->
 
 <button class="w-12 h-12 rounded-lg hover:bg-gray-100 flex items-center justify-center"
   @click="openImagePicker(selectedQuestionId)"

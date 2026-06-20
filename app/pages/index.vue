@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+const forms = ref([])
+
+onMounted(async () => {
+  try {
+    const res = await $fetch('/api/forms/my')
+    forms.value = res
+  } catch (err) {
+    console.error(err)
+  }
+})
+</script>
 <template>
   <div class="min-h-screen bg-[#F3F4F6]">
 
@@ -35,37 +49,57 @@
             placeholder="Search"
             class="w-full rounded-xl bg-[#F3F4F6] py-2 pl-10 pr-4 outline-none placeholder-gray-400 focus:ring-2 focus:ring-[#F97316]"
           />
-
+         
         </div>
-
+      <LogoutButton />
       </div>
     </nav>
 
     <!-- Body -->
-    <main class="mx-auto max-w-6xl px-6 py-8">
+   <main class="mx-auto max-w-6xl px-6 py-8 space-y-8">
+<div>
+  <h2 class="mb-6 text-xl font-semibold text-gray-800">
+    Start a new form
+  </h2>
+</div>
+  <!-- GRID -->
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
 
-      <h2 class="mb-6 text-xl font-semibold text-gray-800">
-        Start a new form
-      </h2>
+    <!-- CREATE NEW FORM -->
+    <NuxtLink
+      to="/forms/new"
+      class="block w-40 cursor-pointer"
+    >
+      <div
+        class="flex h-40 items-center justify-center rounded-xl border border-gray-300 bg-white shadow-sm transition hover:shadow-md"
+      >
+        <span class="text-8xl font-light text-[#C2410C] -mt-6">
+          +
+        </span>
+      </div>
+    </NuxtLink>
 
-      <!-- Blank Form Card -->
-      <NuxtLink
-  to="/forms/new"
-  class="block w-40 cursor-pointer"
->
-        <div
-          class="flex h-40 items-center justify-center rounded-xl border border-gray-300 bg-white shadow-sm transition hover:shadow-md"
-        >
-          <span class=" -mt-6 text-8xl font-light text-[#C2410C]">
-            +
-          </span>
-        </div>
+    <!-- USER FORMS -->
+    <NuxtLink
+      v-for="form in forms"
+      :key="form.id"
+      :to="`/forms/${form.id}`"
+      class="block w-40"
+    >
+      <div class="h-40 rounded-xl border bg-white p-3 shadow-sm hover:shadow-md">
+        <h3 class="font-semibold text-gray-800">
+          {{ form.title }}
+        </h3>
 
-       
+        <p class="text-xs text-gray-500 mt-2">
+          {{ form.description }}
+        </p>
+      </div>
+    </NuxtLink>
 
-      </NuxtLink>
+  </div>
 
-    </main>
+</main>
 
   </div>
 </template>
