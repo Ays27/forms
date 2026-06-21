@@ -3,8 +3,8 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { navigateTo } from '#app'
 
-import Questions from '~/components/Questions.vue'
-import Preview from '~/components/Preview.vue'
+//import Questions from '~/components/Questions.vue'
+//import Preview from '~/components/Preview.vue'
 import { useFormStore } from '~/stores/form'
 
 const isPreviewMode = ref(false)
