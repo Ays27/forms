@@ -43,6 +43,13 @@
       "when": 1781915038281,
       "tag": "0005_cheerful_spot",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1782155431761,
+      "tag": "0006_parched_giant_girl",
+      "breakpoints": true
     }
   ]
 }

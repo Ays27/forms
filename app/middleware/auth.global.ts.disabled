@@ -1,0 +1,22 @@
+import { useAuthSession } from '~/plugins/auth.client'
+
+export default defineNuxtRouteMiddleware((to) => {
+  const { session, loading } = useAuthSession()
+
+  const authPages = ['/login', '/signup']
+
+  // 🔥 WAIT UNTIL SESSION IS READY
+  if (loading.value) return
+
+  const isLoggedIn = !!session.value?.user
+
+  // not logged in → only allow auth pages
+  if (!isLoggedIn && !authPages.includes(to.path)) {
+    return navigateTo('/signup')
+  }
+
+  // logged in → block auth pages
+  if (isLoggedIn && authPages.includes(to.path)) {
+    return navigateTo('/')
+  }
+})

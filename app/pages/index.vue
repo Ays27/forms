@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
+import LogoutButton from '~/components/LogoutButton.vue'
 const forms = ref([])
-
+const { fetchSession } = useSession()
+onMounted(() => {
+  fetchSession()
+})
 onMounted(async () => {
   try {
     const res = await $fetch('/api/forms/my')
@@ -52,6 +55,7 @@ onMounted(async () => {
          
         </div>
       <LogoutButton />
+      
       </div>
     </nav>
 

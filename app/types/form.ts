@@ -13,8 +13,8 @@ export type QuestionType =
 export interface Option {
   text: string
   imageUrl?: string
+  goToSectionId?: number
 }
-
 export interface Question {
   id: number
   title: string

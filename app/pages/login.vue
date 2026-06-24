@@ -83,6 +83,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { authClient } from '~/lib/auth-client'
+import { navigateTo } from '#app'
 
 const email = ref('')
 const password = ref('')
@@ -92,33 +93,16 @@ const passwordError = ref('')
 const generalError = ref('')
 const successMessage = ref('')
 
-/* ---------------------------
-   VALIDATION
-----------------------------*/
-
 const validateEmail = (email: string) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
-/* ---------------------------
-   REDIRECT IF ALREADY LOGGED IN
-----------------------------*/
-
 onMounted(async () => {
-  try {
-    const session = await authClient.getSession()
-
-    if (session?.user) {
-      await navigateTo('/')
-    }
-  } catch (err) {
-    // ignore
+  const res = await authClient.getSession()
+  if (res?.user) {
+    await navigateTo('/')
   }
 })
-
-/* ---------------------------
-   LIVE VALIDATION
-----------------------------*/
 
 watch(email, (val) => {
   emailError.value = validateEmail(val) ? '' : 'Invalid email format'
@@ -129,23 +113,12 @@ watch(password, (val) => {
     val.length >= 8 ? '' : 'Password must be at least 8 characters'
 })
 
-/* ---------------------------
-   FORM VALIDITY
-----------------------------*/
-
 const isFormValid = computed(() => {
   return validateEmail(email.value) && password.value.length >= 8
 })
 
-/* ---------------------------
-   LOGIN HANDLER
-----------------------------*/
-
 const handleLogin = async () => {
-  emailError.value = ''
-  passwordError.value = ''
   generalError.value = ''
-  successMessage.value = ''
 
   try {
     await authClient.signIn.email({
@@ -153,14 +126,10 @@ const handleLogin = async () => {
       password: password.value
     })
 
-    await authClient.getSession()
-
-    successMessage.value = 'Login successful!'
+    // ✅ DO NOT call getSession here
     await navigateTo('/')
-
   } catch (err: any) {
-    generalError.value =
-      err?.message || 'Wrong email or password'
+    generalError.value = err?.message || 'Wrong email or password'
   }
 }
 </script>

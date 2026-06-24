@@ -1,7 +1,7 @@
 <template>
   <button
-    v-if="session?.user"
-    @click="handleLogout"
+    v-if="user"
+    @click="logout"
     class="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"
   >
     Logout
@@ -9,13 +9,5 @@
 </template>
 
 <script setup lang="ts">
-import { useSession } from '~/composables/useSession'
-import { authClient } from '~/lib/auth-client'
-
-const { session } = useSession()
-
-const handleLogout = async () => {
-  await authClient.signOut()
-  await navigateTo('/login')
-}
+const { user, logout } = useSession()
 </script>

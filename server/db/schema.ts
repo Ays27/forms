@@ -7,7 +7,7 @@ import {
   boolean,
   varchar
 } from 'drizzle-orm/pg-core'
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
+
 import { sql } from 'drizzle-orm'
 
 export const forms = pgTable('forms', {
@@ -77,7 +77,9 @@ export const options = pgTable('options', {
 
   text: text('text').notNull(),
 
-  imageUrl: text('image_url')
+  imageUrl: text('image_url'),
+
+  goToSectionId: integer('go_to_section_id')
 })
 
 /* =========================

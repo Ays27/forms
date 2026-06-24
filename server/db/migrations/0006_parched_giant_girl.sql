@@ -1,0 +1,1 @@
+ALTER TABLE "options" ADD COLUMN "go_to_section_id" integer;

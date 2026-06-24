@@ -8,10 +8,12 @@ import Preview from '~/components/Preview.vue'
 import { useFormStore } from '~/stores/form'
 
 const isPreviewMode = ref(false)
-
+const statusMessage = ref('')
 const formStore = useFormStore()
 const route = useRoute()
 
+const { published } = storeToRefs(formStore)
+const { setPublished } = formStore
 onMounted(async () => {
   const id = route.params.id
 
@@ -31,37 +33,48 @@ onMounted(async () => {
   }
 })
 
-/* =========================
-   PUBLISH FORM
-========================= */
 const handlePublish = async () => {
   try {
-    const form = await $fetch('/api/forms/publish', {
-      method: 'POST',
-      body: {
-        title: formStore.formTitle,
-        description: formStore.formDescription,
-        sections: formStore.sections,
-        questions: formStore.questions
-      }
-    })
+    if (!published.value) {
+      const form = await $fetch('/api/forms/publish', {
+        method: 'POST',
+        body: {
+          title: formStore.formTitle,
+          description: formStore.formDescription,
+          sections: formStore.sections,
+          questions: formStore.questions
+        }
+      })
 
-    formStore.formId = form.id
-    formStore.shareId = form.shareId
+      formStore.formId = form.id
+      formStore.shareId = form.shareId
 
-    alert('Form published successfully!')
+      setPublished(true)
+
+    } else {
+      await $fetch(`/api/forms/${formStore.formId}/unpublish`, {
+        method: 'POST'
+      })
+
+      formStore.shareId = null
+      setPublished(false)
+    }
+
   } catch (err) {
     console.error(err)
-    alert('Publish failed')
   }
 }
-
 
 const openResponses = () => {
   const id = formStore.formId
 
   if (!id) {
-    alert('Publish form first')
+    statusMessage.value = 'Publish the form first'
+
+    setTimeout(() => {
+      statusMessage.value = ''
+    }, 3000)
+
     return
   }
 
@@ -72,7 +85,12 @@ const openResponses = () => {
 ========================= */
 const copyLink = async () => {
   if (!formStore.shareId) {
-    alert('Publish form first!')
+    statusMessage.value = 'Publish the form first'
+
+    setTimeout(() => {
+      statusMessage.value = ''
+    }, 3000)
+
     return
   }
 
@@ -80,7 +98,11 @@ const copyLink = async () => {
 
   await navigator.clipboard.writeText(url)
 
-  alert('Link copied!')
+  statusMessage.value = 'Link copied successfully'
+
+  setTimeout(() => {
+    statusMessage.value = ''
+  }, 3000)
 }
 </script>
 
@@ -90,7 +112,12 @@ const copyLink = async () => {
     <!-- NAVBAR -->
     <nav class="border-b bg-white px-6 py-3">
       <div class="flex items-center justify-between">
-
+<div
+  v-if="statusMessage"
+  class="text-sm text-green-600 font-medium"
+>
+  {{ statusMessage }}
+</div>
         <!-- LEFT -->
         <div class="flex items-center gap-4">
           <span class="font-medium text-gray-700">
@@ -119,11 +146,12 @@ const copyLink = async () => {
             @click="copyLink"
           />
 
-          <UButton
-            label="Publish"
-            class="bg-[#C2410C] text-white hover:bg-[#9A3412]"
-            @click="handlePublish"
-          />
+<UButton
+  :label="formStore.published ? 'Published' : 'Publish'"
+  class="rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"
+
+  @click="handlePublish"
+/>
 
           <LogoutButton />
         </div>
@@ -159,11 +187,13 @@ const copyLink = async () => {
     />
 
     <!-- PREVIEW MODE -->
-    <Preview
-      v-else
-      :form-title="formStore.formTitle"
-      :form-description="formStore.formDescription"
-    />
+   <!-- PREVIEW MODE -->
+<Preview
+  v-else
+  :form-title="formStore.formTitle"
+  :form-description="formStore.formDescription"
+  @exit-preview="isPreviewMode = false"
+/>
 
   </div>
 </template>

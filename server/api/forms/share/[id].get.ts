@@ -48,7 +48,9 @@ export default defineEventHandler(async (event) => {
       (o) => o.questionId === q.id
     )
   }))
-
+console.log(
+  JSON.stringify(questionsWithOptions, null, 2)
+)
   return {
     form,
     sections: formSections,

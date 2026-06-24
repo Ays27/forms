@@ -13,7 +13,14 @@ export const useFormStore = defineStore('form', () => {
   const formDescription = ref('Form description')
   const formId = ref<number | null>(null)
   const shareId = ref<string | null>(null)
+  const published = ref(false)
   const selectedQuestionId = ref<number | null>(1)
+  const updateQuestion = (e: any, id: number) => {
+  const q = questions.value.find(q => q.id === id)
+  if (!q) return
+
+  q.title = e.target.innerHTML
+}
   const sections = ref<Section[]>([
     {
       id: 1,
@@ -113,7 +120,9 @@ export const useFormStore = defineStore('form', () => {
       }`
     })
   }
-
+function togglePublish() {
+  published.value = !published.value
+}
 function undo() {
   console.log('UNDO CLICKED')
   if (history.value.length === 0) return
@@ -135,6 +144,18 @@ function undo() {
   formDescription.value = previous.formDescription
   sections.value = previous.sections
   questions.value = previous.questions
+}
+async function setPublished(state: boolean) {
+  published.value = state
+
+  if (!formId.value) return
+
+  await $fetch(`/api/forms/${formId.value}/publish`, {
+    method: 'POST',
+    body: {
+      published: state
+    }
+  })
 }
 function redo() {
   if (future.value.length === 0) return
@@ -170,9 +191,10 @@ function redo() {
     options: data.options
       .filter((o: any) => o.questionId === q.id)
       .map((o: any) => ({
-        text: o.text,
-        imageUrl: o.imageUrl
-      }))
+  text: o.text,
+  imageUrl: o.imageUrl,
+  goToSectionId: o.goToSectionId
+}))
   }
 ))
 saveState()
@@ -194,6 +216,9 @@ addQuestion,
     loadForm,
     undo,
     redo,
+    published,
+    togglePublish,
+    setPublished,
     saveState
   }
 })

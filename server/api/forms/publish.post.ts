@@ -79,12 +79,17 @@ export default defineEventHandler(async (event) => {
 
       if (q.options?.length) {
         await tx.insert(options).values(
-          q.options.map((opt: any) => ({
-            questionId: question.id,
-            text: opt.text,
-            imageUrl: opt.imageUrl ?? null
-          }))
-        )
+  q.options.map((opt: any) => ({
+    questionId: question.id,
+    text: opt.text,
+    imageUrl: opt.imageUrl ?? null,
+
+    goToSectionId:
+      opt.goToSectionId
+        ? sectionMap.get(opt.goToSectionId)
+        : null
+  }))
+)
       }
     }
 

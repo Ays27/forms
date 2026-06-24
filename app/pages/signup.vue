@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-[#F3F4F6]">
 
-    <!-- Navbar -->
+   
     <nav class="border-b bg-white px-4 sm:px-6 py-3">
       <h1 class="text-2xl sm:text-3xl font-bold text-[#C2410C]">
         Forms
@@ -82,6 +82,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { authClient } from '~/lib/auth-client'
+import { navigateTo } from '#app'
 
 const name = ref('')
 const email = ref('')
@@ -95,8 +96,6 @@ const confirmPasswordError = ref('')
 const generalError = ref('')
 const successMessage = ref('')
 
-
-
 const validateEmail = (email: string) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
@@ -105,31 +104,16 @@ const validatePassword = (password: string) => {
   return /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/.test(password)
 }
 
-/* ---------------------------
-   CHECK IF ALREADY LOGGED IN
-----------------------------*/
-
 onMounted(async () => {
-  try {
-    const session = await authClient.getSession()
-
-    if (session?.user) {
-      await navigateTo('/')
-    }
-  } catch (err) {
-    // ignore
+  const res = await authClient.getSession()
+  if (res?.user) {
+    await navigateTo('/')
   }
 })
 
-
 watch(name, (val) => {
-  if (!val.trim()) {
-    nameError.value = 'Name is required'
-  } else if (val.trim().length < 3) {
-    nameError.value = 'Name must be at least 3 characters'
-  } else {
-    nameError.value = ''
-  }
+  nameError.value =
+    val.trim().length < 3 ? 'Name must be at least 3 characters' : ''
 })
 
 watch(email, (val) => {
@@ -147,8 +131,6 @@ watch(confirmPassword, (val) => {
     val === password.value ? '' : 'Passwords do not match'
 })
 
-
-
 const isFormValid = computed(() => {
   return (
     name.value.trim().length >= 3 &&
@@ -158,15 +140,8 @@ const isFormValid = computed(() => {
   )
 })
 
-
-
 const handleSignup = async () => {
-  nameError.value = ''
-  emailError.value = ''
-  passwordError.value = ''
-  confirmPasswordError.value = ''
   generalError.value = ''
-  successMessage.value = ''
 
   try {
     await authClient.signUp.email({
@@ -175,11 +150,9 @@ const handleSignup = async () => {
       name: name.value
     })
 
-    successMessage.value = 'Account created successfully!'
-
-    await authClient.getSession()
+    // ✅ IMPORTANT: DO NOT check session here
+    // just redirect
     await navigateTo('/')
-
   } catch (err: any) {
     generalError.value = err?.message || 'Signup failed'
   }

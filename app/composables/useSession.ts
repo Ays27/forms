@@ -1,30 +1,34 @@
-import { ref } from 'vue'
-import { authClient } from '~/lib/auth-client'
-
-const session = ref<any>(null)
-const loading = ref(true)
-let initialized = false
+import { authClient } from "~/lib/auth-client"
 
 export const useSession = () => {
+  const session = useState<any>("session", () => null)
+  const user = useState<any>("user", () => null)
+  const loading = useState("auth-loading", () => true)
+
   const fetchSession = async () => {
-    if (initialized) return
-
-    loading.value = true
-
     try {
+      loading.value = true
       const res = await authClient.getSession()
-      session.value = res?.data || null
-    } catch (err) {
-      session.value = null
-    }
 
-    loading.value = false
-    initialized = true
+      session.value = res?.data?.session || null
+      user.value = res?.data?.user || null
+    } finally {
+      loading.value = false
+    }
+  }
+
+  const logout = async () => {
+    await authClient.signOut()
+    session.value = null
+    user.value = null
+    await navigateTo('/login')
   }
 
   return {
     session,
+    user,
     loading,
-    fetchSession
+    fetchSession,
+    logout
   }
 }
