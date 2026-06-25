@@ -2537,7 +2537,7 @@ const _routes = [
   {
     name: "forms-new",
     path: "/forms/new",
-    component: () => import('./new-BUCO0xGg.mjs')
+    component: () => import('./new-C1JsJrU8.mjs')
   },
   {
     name: "f-id",
@@ -5759,7 +5759,7 @@ const plugin_B8veUK2nN_PhQWjey1qGeZVAUSpYWweWEipPOzwHeQ8 = /* @__PURE__ */ defin
   // For type portability
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 });
-const LazyIcon = defineAsyncComponent(() => import('./index-CqPBHWVL.mjs').then((r) => r["default"] || r.default || r));
+const LazyIcon = defineAsyncComponent(() => import('./index-ChAJFOYb.mjs').then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon]
 ];
