@@ -46,5 +46,4 @@ export { useScrollShadow } from '../node_modules/.pnpm/@nuxt+ui@4.8.1_@internati
 export { useScrollspy } from '../node_modules/.pnpm/@nuxt+ui@4.8.1_@internation_e3059e92629dcb4d8d7982e9f6d0cb49/node_modules/@nuxt/ui/dist/runtime/composables/useScrollspy';
 export { useToast } from '../node_modules/.pnpm/@nuxt+ui@4.8.1_@internation_e3059e92629dcb4d8d7982e9f6d0cb49/node_modules/@nuxt/ui/dist/runtime/composables/useToast';
 export { defineStore, acceptHMRUpdate, usePinia, storeToRefs } from '../node_modules/.pnpm/@pinia+nuxt@0.11.3_magicast_58297e933b6648842b3cde4eaaa6443d/node_modules/@pinia/nuxt/dist/runtime/composables';
-export { useNuxtDevTools } from '../node_modules/.pnpm/@nuxt+devtools@3.2.4_vite@7_99a3c42abec1cc5a7b36a9635aaf0c78/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { useColorMode } from '../node_modules/.pnpm/@nuxtjs+color-mode@3.5.2_magicast@0.5.2/node_modules/@nuxtjs/color-mode/dist/runtime/composables';

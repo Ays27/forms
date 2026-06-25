@@ -18,8 +18,7 @@
     "drizzle-orm": "^0.45.2",
     "nuxt": "^4.4.4",
     "pg": "^8.21.0",
-    "vue": "^3.5.33",
-    "vue-router": "^5.0.6"
+    "vue": "^3.5.33"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.0",

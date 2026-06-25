@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
     "paths": {
+      "vue-router": [
+        "../node_modules/.pnpm/vue-router@5.0.6_@vue+compi_50dd1815d493fa68b45f0a33526446ac/node_modules/vue-router"
+      ],
+      "vue-router/auto-routes": [
+        "../node_modules/.pnpm/vue-router@5.0.6_@vue+compi_50dd1815d493fa68b45f0a33526446ac/node_modules/vue-router/vue-router-auto-routes"
+      ],
       "nuxt": [
         "../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt"
       ],
