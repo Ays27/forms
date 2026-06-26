@@ -1,17 +1,14 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import vue, { defineComponent, ref, shallowRef, watch, inject, hasInjectionContext, toRef, isRef, h, getCurrentInstance, nextTick, createElementBlock, provide, cloneVNode, computed, toValue, onServerPrefetch, reactive, defineAsyncComponent, Suspense, Fragment, createApp, shallowReactive, unref, onErrorCaptured, createVNode, resolveDynamicComponent, effectScope, mergeProps, getCurrentScope, isReadonly, toRaw, useSSRContext, isShallow, isReactive } from 'vue';
-import { q as klona, s as defuFn, v as parseURL$1, j as encodePath$1, x as decodePath, y as hasProtocol, z as isScriptProtocol, o as joinURL, w as withQuery, A as sanitizeStatusCode, B as getContext, $ as $fetch$1, C as baseURL, D as hash, c as createError$1, E as executeAsync, F as defu } from '../_/nitro.mjs';
-import colors from 'tailwindcss/colors';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import require$$0, { inject, hasInjectionContext, getCurrentInstance, defineComponent, createElementBlock, shallowRef, provide, cloneVNode, h, ref, Suspense, Fragment, createApp, shallowReactive, computed, unref, watch, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, reactive, effectScope, defineAsyncComponent, mergeProps, getCurrentScope, toRef, isReadonly, isRef, toValue, toRaw, useSSRContext, isShallow, isReactive, nextTick } from 'vue';
+import { o as parseURL$1, h as encodePath$1, q as decodePath, s as hasProtocol, v as isScriptProtocol, n as joinURL, w as withQuery, x as sanitizeStatusCode, y as getContext, $ as $fetch, c as createError$1, z as executeAsync, A as hash, B as defu } from '../_/nitro.mjs';
+import { b as baseURL } from '../routes/renderer.mjs';
 import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode } from 'vue/server-renderer';
-import { u as useHead$1, h as headSymbol } from '../routes/renderer.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
 import 'node:buffer';
-import '@iconify/utils';
-import 'node:crypto';
-import 'consola';
 import 'node:fs';
 import 'node:path';
+import 'node:crypto';
 import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
 import 'devalue';
@@ -278,7 +275,7 @@ async function _applyPromised(fn, _this, args) {
 }
 
 if (!globalThis.$fetch) {
-  globalThis.$fetch = $fetch$1.create({
+  globalThis.$fetch = $fetch.create({
     baseURL: baseURL()
   });
 }
@@ -649,10 +646,10 @@ function requirePinia_prod() {
   if (hasRequiredPinia_prod) return pinia_prod;
   hasRequiredPinia_prod = 1;
   (function(exports) {
-    var vue$1 = vue;
+    var vue = require$$0;
     let activePinia;
     const setActivePinia = (pinia) => activePinia = pinia;
-    const getActivePinia = () => vue$1.hasInjectionContext() && vue$1.inject(piniaSymbol) || activePinia;
+    const getActivePinia = () => vue.hasInjectionContext() && vue.inject(piniaSymbol) || activePinia;
     const piniaSymbol = (
       /* istanbul ignore next */
       /* @__PURE__ */ Symbol()
@@ -667,11 +664,11 @@ function requirePinia_prod() {
       MutationType["patchFunction"] = "patch function";
     })(exports.MutationType || (exports.MutationType = {}));
     function createPinia() {
-      const scope = vue$1.effectScope(true);
-      const state = scope.run(() => vue$1.ref({}));
+      const scope = vue.effectScope(true);
+      const state = scope.run(() => vue.ref({}));
       let _p = [];
       let toBeInstalled = [];
-      const pinia = vue$1.markRaw({
+      const pinia = vue.markRaw({
         install(app) {
           setActivePinia(pinia);
           pinia._a = app;
@@ -719,8 +716,8 @@ function requirePinia_prod() {
         const isDel = subscriptions.delete(callback);
         isDel && onCleanup();
       };
-      if (!detached && vue$1.getCurrentScope()) {
-        vue$1.onScopeDispose(removeSubscription);
+      if (!detached && vue.getCurrentScope()) {
+        vue.onScopeDispose(removeSubscription);
       }
       return removeSubscription;
     }
@@ -743,7 +740,7 @@ function requirePinia_prod() {
           continue;
         const subPatch = patchToApply[key];
         const targetValue = target[key];
-        if (isPlainObject(targetValue) && isPlainObject(subPatch) && target.hasOwnProperty(key) && !vue$1.isRef(subPatch) && !vue$1.isReactive(subPatch)) {
+        if (isPlainObject(targetValue) && isPlainObject(subPatch) && target.hasOwnProperty(key) && !vue.isRef(subPatch) && !vue.isReactive(subPatch)) {
           target[key] = mergeReactiveObjects(targetValue, subPatch);
         } else {
           target[key] = subPatch;
@@ -763,7 +760,7 @@ function requirePinia_prod() {
     }
     const { assign: assign2 } = Object;
     function isComputed(o) {
-      return !!(vue$1.isRef(o) && o.effect);
+      return !!(vue.isRef(o) && o.effect);
     }
     function createOptionsStore(id, options, pinia, hot) {
       const { state, actions, getters } = options;
@@ -773,9 +770,9 @@ function requirePinia_prod() {
         if (!initialState && true) {
           pinia.state.value[id] = state ? state() : {};
         }
-        const localState = vue$1.toRefs(pinia.state.value[id]);
+        const localState = vue.toRefs(pinia.state.value[id]);
         return assign2(localState, actions, Object.keys(getters || {}).reduce((computedGetters, name) => {
-          computedGetters[name] = vue$1.markRaw(vue$1.computed(() => {
+          computedGetters[name] = vue.markRaw(vue.computed(() => {
             setActivePinia(pinia);
             const store2 = pinia._s.get(id);
             return getters[name].call(store2, store2);
@@ -799,7 +796,7 @@ function requirePinia_prod() {
       if (!isOptionsStore && !initialState && true) {
         pinia.state.value[$id] = {};
       }
-      vue$1.ref({});
+      vue.ref({});
       let activeListener;
       function $patch(partialStateOrMutator) {
         let subscriptionMutation;
@@ -821,7 +818,7 @@ function requirePinia_prod() {
           };
         }
         const myListenerId = activeListener = /* @__PURE__ */ Symbol();
-        vue$1.nextTick().then(() => {
+        vue.nextTick().then(() => {
           if (activeListener === myListenerId) {
             isListening = true;
           }
@@ -900,7 +897,7 @@ function requirePinia_prod() {
         $reset,
         $subscribe(callback, options2 = {}) {
           const removeSubscription = addSubscription(subscriptions, callback, options2.detached, () => stopWatcher());
-          const stopWatcher = scope.run(() => vue$1.watch(() => pinia.state.value[$id], (state) => {
+          const stopWatcher = scope.run(() => vue.watch(() => pinia.state.value[$id], (state) => {
             if (options2.flush === "sync" ? isSyncListening : isListening) {
               callback({
                 storeId: $id,
@@ -913,16 +910,16 @@ function requirePinia_prod() {
         },
         $dispose
       };
-      const store = vue$1.reactive(partialStore);
+      const store = vue.reactive(partialStore);
       pinia._s.set($id, store);
       const runWithContext = pinia._a && pinia._a.runWithContext || fallbackRunWithContext;
-      const setupStore = runWithContext(() => pinia._e.run(() => (scope = vue$1.effectScope()).run(() => setup({ action }))));
+      const setupStore = runWithContext(() => pinia._e.run(() => (scope = vue.effectScope()).run(() => setup({ action }))));
       for (const key in setupStore) {
         const prop = setupStore[key];
-        if (vue$1.isRef(prop) && !isComputed(prop) || vue$1.isReactive(prop)) {
+        if (vue.isRef(prop) && !isComputed(prop) || vue.isReactive(prop)) {
           if (!isOptionsStore) {
             if (initialState && shouldHydrate(prop)) {
-              if (vue$1.isRef(prop)) {
+              if (vue.isRef(prop)) {
                 prop.value = initialState[key];
               } else {
                 mergeReactiveObjects(prop, initialState[key]);
@@ -937,7 +934,7 @@ function requirePinia_prod() {
         } else ;
       }
       assign2(store, setupStore);
-      assign2(vue$1.toRaw(store), setupStore);
+      assign2(vue.toRaw(store), setupStore);
       Object.defineProperty(store, "$state", {
         get: () => pinia.state.value[$id],
         set: (state) => {
@@ -969,10 +966,10 @@ function requirePinia_prod() {
       const isSetupStore = typeof setup === "function";
       options = isSetupStore ? setupOptions : setup;
       function useStore(pinia, hot) {
-        const hasContext = vue$1.hasInjectionContext();
+        const hasContext = vue.hasInjectionContext();
         pinia = // in test mode, ignore the argument provided as we can always retrieve a
         // pinia instance with getActivePinia()
-        (pinia) || (hasContext ? vue$1.inject(piniaSymbol, null) : null);
+        (pinia) || (hasContext ? vue.inject(piniaSymbol, null) : null);
         if (pinia)
           setActivePinia(pinia);
         pinia = activePinia;
@@ -1057,21 +1054,21 @@ function requirePinia_prod() {
       }, {});
     }
     function storeToRefs(store) {
-      const rawStore = vue$1.toRaw(store);
+      const rawStore = vue.toRaw(store);
       const refs = {};
       for (const key in rawStore) {
         const value = rawStore[key];
         if (value.effect) {
           refs[key] = // ...
-          vue$1.computed({
+          vue.computed({
             get: () => store[key],
             set(value2) {
               store[key] = value2;
             }
           });
-        } else if (vue$1.isRef(value) || vue$1.isReactive(value)) {
+        } else if (vue.isRef(value) || vue.isReactive(value)) {
           refs[key] = // ---
-          vue$1.toRef(store, key);
+          vue.toRef(store, key);
         }
       }
       return refs;
@@ -1095,22 +1092,6 @@ function requirePinia_prod() {
   return pinia_prod;
 }
 var pinia_prodExports = /* @__PURE__ */ requirePinia_prod();
-function injectHead(nuxtApp) {
-  const nuxt = nuxtApp || useNuxtApp();
-  return nuxt.ssrContext?.head || nuxt.runWithContext(() => {
-    if (hasInjectionContext()) {
-      const head = inject(headSymbol);
-      if (!head) {
-        throw new Error("[nuxt] [unhead] Missing Unhead instance.");
-      }
-      return head;
-    }
-  });
-}
-function useHead(input, options = {}) {
-  const head = options.head || injectHead(options.nuxt);
-  return useHead$1(input, { head, ...options });
-}
 const matcher = (m, p) => {
   return [];
 };
@@ -2532,47 +2513,47 @@ const _routes = [
   {
     name: "forms-responses-id",
     path: "/forms/responses/:id()",
-    component: () => import('./_id_-DdxdkDAQ.mjs')
+    component: () => import('./_id_-Bi5hkkEc.mjs')
   },
   {
     name: "forms-new",
     path: "/forms/new",
-    component: () => import('./new-C1JsJrU8.mjs')
+    component: () => import('./new-tPjo-vE2.mjs')
   },
   {
     name: "f-id",
     path: "/f/:id()",
-    component: () => import('./_id_-sA09SrQA.mjs')
+    component: () => import('./_id_-CECBvTEy.mjs')
   },
   {
     name: "forms-id",
     path: "/forms/:id()",
-    component: () => import('./_id_-CHxNTXu2.mjs')
+    component: () => import('./_id_-BE_lFRsj.mjs')
   },
   {
     name: "forms-slug",
     path: "/forms/:slug()",
-    component: () => import('./_slug_-DVQmbEyl.mjs')
+    component: () => import('./_slug_-Br35tOs9.mjs')
   },
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-tXZ5_qph.mjs')
+    component: () => import('./login-BCLfZhVS.mjs')
   },
   {
     name: "preview",
     path: "/preview",
-    component: () => import('./preview-Dkj6pHxq.mjs')
+    component: () => import('./preview-DrDE6hX7.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-B6sf_ZTH.mjs')
+    component: () => import('./signup-1K9cK0pr.mjs')
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-C6EVbuET.mjs')
+    component: () => import('./index-BtdISbIM.mjs')
   }
 ];
 var shared_cjs_prod = {};
@@ -3878,35 +3859,6 @@ function mergeAbortSignals(signals, cleanupSignal, timeout) {
   }
   return controller.signal;
 }
-const useStateKeyPrefix = "$s";
-function useState(...args) {
-  const autoKey = typeof args[args.length - 1] === "string" ? args.pop() : void 0;
-  if (typeof args[0] !== "string") {
-    args.unshift(autoKey);
-  }
-  const [_key, init] = args;
-  if (!_key || typeof _key !== "string") {
-    throw new TypeError("[nuxt] [useState] key must be a string: " + _key);
-  }
-  if (init !== void 0 && typeof init !== "function") {
-    throw new Error("[nuxt] [useState] init must be a function: " + init);
-  }
-  const key = useStateKeyPrefix + _key;
-  const nuxtApp = useNuxtApp();
-  const state = toRef(nuxtApp.payload.state, key);
-  if (init) {
-    nuxtApp._state[key] ??= { _default: init };
-  }
-  if (state.value === void 0 && init) {
-    const initialValue = init();
-    if (isRef(initialValue)) {
-      nuxtApp.payload.state[key] = initialValue;
-      return initialValue;
-    }
-    state.value = initialValue;
-  }
-  return state;
-}
 function useRequestEvent(nuxtApp) {
   nuxtApp ||= useNuxtApp();
   return nuxtApp.ssrContext?.event;
@@ -4023,311 +3975,6 @@ createUseFetch.__nuxt_factory({
   // @ts-expect-error private property
   _functionName: "useLazyFetch"
 });
-const inlineConfig = {
-  "nuxt": {},
-  "ui": {
-    "colors": {
-      "primary": "green",
-      "secondary": "blue",
-      "success": "green",
-      "info": "blue",
-      "warning": "yellow",
-      "error": "red",
-      "neutral": "slate"
-    },
-    "icons": {
-      "arrowDown": "i-lucide-arrow-down",
-      "arrowLeft": "i-lucide-arrow-left",
-      "arrowRight": "i-lucide-arrow-right",
-      "arrowUp": "i-lucide-arrow-up",
-      "caution": "i-lucide-circle-alert",
-      "check": "i-lucide-check",
-      "chevronDoubleLeft": "i-lucide-chevrons-left",
-      "chevronDoubleRight": "i-lucide-chevrons-right",
-      "chevronDown": "i-lucide-chevron-down",
-      "chevronLeft": "i-lucide-chevron-left",
-      "chevronRight": "i-lucide-chevron-right",
-      "chevronUp": "i-lucide-chevron-up",
-      "close": "i-lucide-x",
-      "copy": "i-lucide-copy",
-      "copyCheck": "i-lucide-copy-check",
-      "dark": "i-lucide-moon",
-      "drag": "i-lucide-grip-vertical",
-      "ellipsis": "i-lucide-ellipsis",
-      "error": "i-lucide-circle-x",
-      "external": "i-lucide-arrow-up-right",
-      "eye": "i-lucide-eye",
-      "eyeOff": "i-lucide-eye-off",
-      "file": "i-lucide-file",
-      "folder": "i-lucide-folder",
-      "folderOpen": "i-lucide-folder-open",
-      "hash": "i-lucide-hash",
-      "info": "i-lucide-info",
-      "light": "i-lucide-sun",
-      "loading": "i-lucide-loader-circle",
-      "menu": "i-lucide-menu",
-      "minus": "i-lucide-minus",
-      "panelClose": "i-lucide-panel-left-close",
-      "panelOpen": "i-lucide-panel-left-open",
-      "plus": "i-lucide-plus",
-      "reload": "i-lucide-rotate-ccw",
-      "search": "i-lucide-search",
-      "stop": "i-lucide-square",
-      "success": "i-lucide-circle-check",
-      "system": "i-lucide-monitor",
-      "tip": "i-lucide-lightbulb",
-      "upload": "i-lucide-upload",
-      "warning": "i-lucide-triangle-alert"
-    },
-    "tv": {
-      "twMergeConfig": {}
-    }
-  },
-  "icon": {
-    "provider": "server",
-    "class": "",
-    "aliases": {},
-    "iconifyApiEndpoint": "https://api.iconify.design",
-    "localApiEndpoint": "/api/_nuxt_icon",
-    "fallbackToApi": true,
-    "cssSelectorPrefix": "i-",
-    "cssWherePseudo": true,
-    "cssLayer": "base",
-    "mode": "css",
-    "attrs": {
-      "aria-hidden": true
-    },
-    "collections": [
-      "academicons",
-      "akar-icons",
-      "ant-design",
-      "arcticons",
-      "basil",
-      "bi",
-      "bitcoin-icons",
-      "bpmn",
-      "brandico",
-      "bx",
-      "bxl",
-      "bxs",
-      "bytesize",
-      "carbon",
-      "catppuccin",
-      "cbi",
-      "charm",
-      "ci",
-      "cib",
-      "cif",
-      "cil",
-      "circle-flags",
-      "circum",
-      "clarity",
-      "codex",
-      "codicon",
-      "covid",
-      "cryptocurrency",
-      "cryptocurrency-color",
-      "cuida",
-      "dashicons",
-      "devicon",
-      "devicon-plain",
-      "dinkie-icons",
-      "duo-icons",
-      "ei",
-      "el",
-      "emojione",
-      "emojione-monotone",
-      "emojione-v1",
-      "entypo",
-      "entypo-social",
-      "eos-icons",
-      "ep",
-      "et",
-      "eva",
-      "f7",
-      "fa",
-      "fa-brands",
-      "fa-regular",
-      "fa-solid",
-      "fa6-brands",
-      "fa6-regular",
-      "fa6-solid",
-      "fa7-brands",
-      "fa7-regular",
-      "fa7-solid",
-      "fad",
-      "famicons",
-      "fe",
-      "feather",
-      "file-icons",
-      "flag",
-      "flagpack",
-      "flat-color-icons",
-      "flat-ui",
-      "flowbite",
-      "fluent",
-      "fluent-color",
-      "fluent-emoji",
-      "fluent-emoji-flat",
-      "fluent-emoji-high-contrast",
-      "fluent-mdl2",
-      "fontelico",
-      "fontisto",
-      "formkit",
-      "foundation",
-      "fxemoji",
-      "gala",
-      "game-icons",
-      "garden",
-      "geo",
-      "gg",
-      "gis",
-      "gravity-ui",
-      "gridicons",
-      "grommet-icons",
-      "guidance",
-      "healthicons",
-      "heroicons",
-      "heroicons-outline",
-      "heroicons-solid",
-      "hugeicons",
-      "humbleicons",
-      "ic",
-      "icomoon-free",
-      "icon-park",
-      "icon-park-outline",
-      "icon-park-solid",
-      "icon-park-twotone",
-      "iconamoon",
-      "iconoir",
-      "icons8",
-      "il",
-      "ion",
-      "iwwa",
-      "ix",
-      "jam",
-      "la",
-      "lets-icons",
-      "line-md",
-      "lineicons",
-      "logos",
-      "ls",
-      "lsicon",
-      "lucide",
-      "lucide-lab",
-      "mage",
-      "majesticons",
-      "maki",
-      "map",
-      "marketeq",
-      "material-icon-theme",
-      "material-symbols",
-      "material-symbols-light",
-      "mdi",
-      "mdi-light",
-      "medical-icon",
-      "memory",
-      "meteocons",
-      "meteor-icons",
-      "mi",
-      "mingcute",
-      "mono-icons",
-      "mynaui",
-      "nimbus",
-      "nonicons",
-      "noto",
-      "noto-v1",
-      "nrk",
-      "octicon",
-      "oi",
-      "ooui",
-      "openmoji",
-      "oui",
-      "pajamas",
-      "pepicons",
-      "pepicons-pencil",
-      "pepicons-pop",
-      "pepicons-print",
-      "ph",
-      "picon",
-      "pixel",
-      "pixelarticons",
-      "prime",
-      "proicons",
-      "ps",
-      "qlementine-icons",
-      "quill",
-      "radix-icons",
-      "raphael",
-      "ri",
-      "rivet-icons",
-      "roentgen",
-      "si",
-      "si-glyph",
-      "sidekickicons",
-      "simple-icons",
-      "simple-line-icons",
-      "skill-icons",
-      "solar",
-      "stash",
-      "streamline",
-      "streamline-block",
-      "streamline-color",
-      "streamline-cyber",
-      "streamline-cyber-color",
-      "streamline-emojis",
-      "streamline-flex",
-      "streamline-flex-color",
-      "streamline-freehand",
-      "streamline-freehand-color",
-      "streamline-kameleon-color",
-      "streamline-logos",
-      "streamline-pixel",
-      "streamline-plump",
-      "streamline-plump-color",
-      "streamline-sharp",
-      "streamline-sharp-color",
-      "streamline-stickies-color",
-      "streamline-ultimate",
-      "streamline-ultimate-color",
-      "subway",
-      "svg-spinners",
-      "system-uicons",
-      "tabler",
-      "tdesign",
-      "teenyicons",
-      "temaki",
-      "token",
-      "token-branded",
-      "topcoat",
-      "twemoji",
-      "typcn",
-      "uil",
-      "uim",
-      "uis",
-      "uit",
-      "uiw",
-      "unjs",
-      "vaadin",
-      "vs",
-      "vscode-icons",
-      "websymbol",
-      "weui",
-      "whh",
-      "wi",
-      "wpf",
-      "zmdi",
-      "zondicons"
-    ],
-    "fetchTimeout": 1500
-  }
-};
-const appConfig = /* @__PURE__ */ defuFn(inlineConfig);
-function useAppConfig() {
-  const nuxtApp = useNuxtApp();
-  nuxtApp._appConfig ||= klona(appConfig);
-  return nuxtApp._appConfig;
-}
 const plugin = /* @__PURE__ */ defineNuxtPlugin({
   name: "pinia",
   setup(nuxtApp) {
@@ -4351,1467 +3998,8 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     }
   }
 });
-const preference = "system";
-const plugin_server_Ns7Kxyh_4Fi2BbVy6T9WU8hHy_zYKd3cgoE6VA9fFBw = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  const colorMode = nuxtApp.ssrContext?.islandContext ? ref({}) : useState("color-mode", () => reactive({
-    preference,
-    value: preference,
-    unknown: true,
-    forced: false
-  })).value;
-  const htmlAttrs = {};
-  {
-    useHead({ htmlAttrs });
-  }
-  useRouter().afterEach((to) => {
-    const forcedColorMode = to.meta.colorMode;
-    if (forcedColorMode && forcedColorMode !== "system") {
-      colorMode.value = htmlAttrs["data-color-mode-forced"] = forcedColorMode;
-      colorMode.forced = true;
-    } else if (forcedColorMode === "system") {
-      console.warn("You cannot force the colorMode to system at the page level.");
-    }
-  });
-  nuxtApp.provide("colorMode", colorMode);
-});
-const matchIconName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const stringToIcon = (value, validate2, allowSimpleName, provider = "") => {
-  const colonSeparated = value.split(":");
-  if (value.slice(0, 1) === "@") {
-    if (colonSeparated.length < 2 || colonSeparated.length > 3) return null;
-    provider = colonSeparated.shift().slice(1);
-  }
-  if (colonSeparated.length > 3 || !colonSeparated.length) return null;
-  if (colonSeparated.length > 1) {
-    const name2 = colonSeparated.pop();
-    const prefix = colonSeparated.pop();
-    const result = {
-      provider: colonSeparated.length > 0 ? colonSeparated[0] : provider,
-      prefix,
-      name: name2
-    };
-    return validate2 && !validateIconName(result) ? null : result;
-  }
-  const name = colonSeparated[0];
-  const dashSeparated = name.split("-");
-  if (dashSeparated.length > 1) {
-    const result = {
-      provider,
-      prefix: dashSeparated.shift(),
-      name: dashSeparated.join("-")
-    };
-    return validate2 && !validateIconName(result) ? null : result;
-  }
-  if (allowSimpleName && provider === "") {
-    const result = {
-      provider,
-      prefix: "",
-      name
-    };
-    return validate2 && !validateIconName(result, allowSimpleName) ? null : result;
-  }
-  return null;
-};
-const validateIconName = (icon, allowSimpleName) => {
-  if (!icon) return false;
-  return !!((allowSimpleName && icon.prefix === "" || !!icon.prefix) && !!icon.name);
-};
-function getIconsTree(data, names) {
-  const icons = data.icons;
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  const resolved = /* @__PURE__ */ Object.create(null);
-  function resolve(name) {
-    if (icons[name]) return resolved[name] = [];
-    if (!(name in resolved)) {
-      resolved[name] = null;
-      const parent = aliases[name] && aliases[name].parent;
-      const value = parent && resolve(parent);
-      if (value) resolved[name] = [parent].concat(value);
-    }
-    return resolved[name];
-  }
-  Object.keys(icons).concat(Object.keys(aliases)).forEach(resolve);
-  return resolved;
-}
-const defaultIconDimensions = Object.freeze({
-  left: 0,
-  top: 0,
-  width: 16,
-  height: 16
-});
-const defaultIconTransformations = Object.freeze({
-  rotate: 0,
-  vFlip: false,
-  hFlip: false
-});
-const defaultIconProps = Object.freeze({
-  ...defaultIconDimensions,
-  ...defaultIconTransformations
-});
-const defaultExtendedIconProps = Object.freeze({
-  ...defaultIconProps,
-  body: "",
-  hidden: false
-});
-function mergeIconTransformations(obj1, obj2) {
-  const result = {};
-  if (!obj1.hFlip !== !obj2.hFlip) result.hFlip = true;
-  if (!obj1.vFlip !== !obj2.vFlip) result.vFlip = true;
-  const rotate = ((obj1.rotate || 0) + (obj2.rotate || 0)) % 4;
-  if (rotate) result.rotate = rotate;
-  return result;
-}
-function mergeIconData(parent, child) {
-  const result = mergeIconTransformations(parent, child);
-  for (const key in defaultExtendedIconProps) if (key in defaultIconTransformations) {
-    if (key in parent && !(key in result)) result[key] = defaultIconTransformations[key];
-  } else if (key in child) result[key] = child[key];
-  else if (key in parent) result[key] = parent[key];
-  return result;
-}
-function internalGetIconData(data, name, tree) {
-  const icons = data.icons;
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  let currentProps = {};
-  function parse(name2) {
-    currentProps = mergeIconData(icons[name2] || aliases[name2], currentProps);
-  }
-  parse(name);
-  tree.forEach(parse);
-  return mergeIconData(data, currentProps);
-}
-function parseIconSet(data, callback) {
-  const names = [];
-  if (typeof data !== "object" || typeof data.icons !== "object") return names;
-  if (data.not_found instanceof Array) data.not_found.forEach((name) => {
-    callback(name, null);
-    names.push(name);
-  });
-  const tree = getIconsTree(data);
-  for (const name in tree) {
-    const item = tree[name];
-    if (item) {
-      callback(name, internalGetIconData(data, name, item));
-      names.push(name);
-    }
-  }
-  return names;
-}
-const optionalPropertyDefaults = {
-  provider: "",
-  aliases: {},
-  not_found: {},
-  ...defaultIconDimensions
-};
-function checkOptionalProps(item, defaults) {
-  for (const prop in defaults) if (prop in item && typeof item[prop] !== typeof defaults[prop]) return false;
-  return true;
-}
-function quicklyValidateIconSet(obj) {
-  if (typeof obj !== "object" || obj === null) return null;
-  const data = obj;
-  if (typeof data.prefix !== "string" || !obj.icons || typeof obj.icons !== "object") return null;
-  if (!checkOptionalProps(obj, optionalPropertyDefaults)) return null;
-  const icons = data.icons;
-  for (const name in icons) {
-    const icon = icons[name];
-    if (!name || typeof icon.body !== "string" || !checkOptionalProps(icon, defaultExtendedIconProps)) return null;
-  }
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  for (const name in aliases) {
-    const icon = aliases[name];
-    const parent = icon.parent;
-    if (!name || typeof parent !== "string" || !icons[parent] && !aliases[parent] || !checkOptionalProps(icon, defaultExtendedIconProps)) return null;
-  }
-  return data;
-}
-const dataStorage = /* @__PURE__ */ Object.create(null);
-function newStorage(provider, prefix) {
-  return {
-    provider,
-    prefix,
-    icons: /* @__PURE__ */ Object.create(null),
-    missing: /* @__PURE__ */ new Set()
-  };
-}
-function getStorage(provider, prefix) {
-  const providerStorage = dataStorage[provider] || (dataStorage[provider] = /* @__PURE__ */ Object.create(null));
-  return providerStorage[prefix] || (providerStorage[prefix] = newStorage(provider, prefix));
-}
-function addIconSet(storage2, data) {
-  if (!quicklyValidateIconSet(data)) return [];
-  return parseIconSet(data, (name, icon) => {
-    if (icon) storage2.icons[name] = icon;
-    else storage2.missing.add(name);
-  });
-}
-let simpleNames = false;
-function allowSimpleNames(allow) {
-  if (typeof allow === "boolean") simpleNames = allow;
-  return simpleNames;
-}
-function getIconData(name) {
-  const icon = typeof name === "string" ? stringToIcon(name, true, simpleNames) : name;
-  if (icon) {
-    const storage2 = getStorage(icon.provider, icon.prefix);
-    const iconName = icon.name;
-    return storage2.icons[iconName] || (storage2.missing.has(iconName) ? null : void 0);
-  }
-}
-function getIcon(name) {
-  const result = getIconData(name);
-  return result ? {
-    ...defaultIconProps,
-    ...result
-  } : result;
-}
-const defaultIconSizeCustomisations = Object.freeze({
-  width: null,
-  height: null
-});
-const defaultIconCustomisations = Object.freeze({
-  ...defaultIconSizeCustomisations,
-  ...defaultIconTransformations
-});
-const unitsSplit = /(-?[0-9.]*[0-9]+[0-9.]*)/g;
-const unitsTest = /^-?[0-9.]*[0-9]+[0-9.]*$/g;
-function calculateSize(size, ratio, precision) {
-  if (ratio === 1) return size;
-  precision = precision || 100;
-  if (typeof size === "number") return Math.ceil(size * ratio * precision) / precision;
-  if (typeof size !== "string") return size;
-  const oldParts = size.split(unitsSplit);
-  if (oldParts === null || !oldParts.length) return size;
-  const newParts = [];
-  let code = oldParts.shift();
-  let isNumber = unitsTest.test(code);
-  while (true) {
-    if (isNumber) {
-      const num = parseFloat(code);
-      if (isNaN(num)) newParts.push(code);
-      else newParts.push(Math.ceil(num * ratio * precision) / precision);
-    } else newParts.push(code);
-    code = oldParts.shift();
-    if (code === void 0) return newParts.join("");
-    isNumber = !isNumber;
-  }
-}
-function splitSVGDefs(content, tag = "defs") {
-  let defs = "";
-  const index = content.indexOf("<" + tag);
-  while (index >= 0) {
-    const start = content.indexOf(">", index);
-    const end = content.indexOf("</" + tag);
-    if (start === -1 || end === -1) break;
-    const endEnd = content.indexOf(">", end);
-    if (endEnd === -1) break;
-    defs += content.slice(start + 1, end).trim();
-    content = content.slice(0, index).trim() + content.slice(endEnd + 1);
-  }
-  return {
-    defs,
-    content
-  };
-}
-function mergeDefsAndContent(defs, content) {
-  return defs ? "<defs>" + defs + "</defs>" + content : content;
-}
-function wrapSVGContent(body, start, end) {
-  const split = splitSVGDefs(body);
-  return mergeDefsAndContent(split.defs, start + split.content + end);
-}
-const isUnsetKeyword = (value) => value === "unset" || value === "undefined" || value === "none";
-function iconToSVG(icon, customisations) {
-  const fullIcon = {
-    ...defaultIconProps,
-    ...icon
-  };
-  const fullCustomisations = {
-    ...defaultIconCustomisations,
-    ...customisations
-  };
-  const box = {
-    left: fullIcon.left,
-    top: fullIcon.top,
-    width: fullIcon.width,
-    height: fullIcon.height
-  };
-  let body = fullIcon.body;
-  [fullIcon, fullCustomisations].forEach((props) => {
-    const transformations = [];
-    const hFlip = props.hFlip;
-    const vFlip = props.vFlip;
-    let rotation = props.rotate;
-    if (hFlip) if (vFlip) rotation += 2;
-    else {
-      transformations.push("translate(" + (box.width + box.left).toString() + " " + (0 - box.top).toString() + ")");
-      transformations.push("scale(-1 1)");
-      box.top = box.left = 0;
-    }
-    else if (vFlip) {
-      transformations.push("translate(" + (0 - box.left).toString() + " " + (box.height + box.top).toString() + ")");
-      transformations.push("scale(1 -1)");
-      box.top = box.left = 0;
-    }
-    let tempValue;
-    if (rotation < 0) rotation -= Math.floor(rotation / 4) * 4;
-    rotation = rotation % 4;
-    switch (rotation) {
-      case 1:
-        tempValue = box.height / 2 + box.top;
-        transformations.unshift("rotate(90 " + tempValue.toString() + " " + tempValue.toString() + ")");
-        break;
-      case 2:
-        transformations.unshift("rotate(180 " + (box.width / 2 + box.left).toString() + " " + (box.height / 2 + box.top).toString() + ")");
-        break;
-      case 3:
-        tempValue = box.width / 2 + box.left;
-        transformations.unshift("rotate(-90 " + tempValue.toString() + " " + tempValue.toString() + ")");
-        break;
-    }
-    if (rotation % 2 === 1) {
-      if (box.left !== box.top) {
-        tempValue = box.left;
-        box.left = box.top;
-        box.top = tempValue;
-      }
-      if (box.width !== box.height) {
-        tempValue = box.width;
-        box.width = box.height;
-        box.height = tempValue;
-      }
-    }
-    if (transformations.length) body = wrapSVGContent(body, '<g transform="' + transformations.join(" ") + '">', "</g>");
-  });
-  const customisationsWidth = fullCustomisations.width;
-  const customisationsHeight = fullCustomisations.height;
-  const boxWidth = box.width;
-  const boxHeight = box.height;
-  let width;
-  let height;
-  if (customisationsWidth === null) {
-    height = customisationsHeight === null ? "1em" : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
-    width = calculateSize(height, boxWidth / boxHeight);
-  } else {
-    width = customisationsWidth === "auto" ? boxWidth : customisationsWidth;
-    height = customisationsHeight === null ? calculateSize(width, boxHeight / boxWidth) : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
-  }
-  const attributes = {};
-  const setAttr = (prop, value) => {
-    if (!isUnsetKeyword(value)) attributes[prop] = value.toString();
-  };
-  setAttr("width", width);
-  setAttr("height", height);
-  const viewBox = [
-    box.left,
-    box.top,
-    boxWidth,
-    boxHeight
-  ];
-  attributes.viewBox = viewBox.join(" ");
-  return {
-    attributes,
-    viewBox,
-    body
-  };
-}
-const regex = /\sid="(\S+)"/g;
-const counters = /* @__PURE__ */ new Map();
-function nextID(id) {
-  id = id.replace(/[0-9]+$/, "") || "a";
-  const count = counters.get(id) || 0;
-  counters.set(id, count + 1);
-  return count ? `${id}${count}` : id;
-}
-function replaceIDs(body) {
-  const ids = [];
-  let match;
-  while (match = regex.exec(body)) ids.push(match[1]);
-  if (!ids.length) return body;
-  const suffix = "suffix" + (Math.random() * 16777216 | Date.now()).toString(16);
-  ids.forEach((id) => {
-    const newID = nextID(id);
-    const escapedID = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    body = body.replace(new RegExp('([#;"])(' + escapedID + ')([")]|\\.[a-z])', "g"), "$1" + newID + suffix + "$3");
-  });
-  body = body.replace(new RegExp(suffix, "g"), "");
-  return body;
-}
-const storage = /* @__PURE__ */ Object.create(null);
-function setAPIModule(provider, item) {
-  storage[provider] = item;
-}
-function getAPIModule(provider) {
-  return storage[provider] || storage[""];
-}
-function createAPIConfig(source) {
-  let resources;
-  if (typeof source.resources === "string") resources = [source.resources];
-  else {
-    resources = source.resources;
-    if (!(resources instanceof Array) || !resources.length) return null;
-  }
-  return {
-    resources,
-    path: source.path || "/",
-    maxURL: source.maxURL || 500,
-    rotate: source.rotate || 750,
-    timeout: source.timeout || 5e3,
-    random: source.random === true,
-    index: source.index || 0,
-    dataAfterTimeout: source.dataAfterTimeout !== false
-  };
-}
-const configStorage = /* @__PURE__ */ Object.create(null);
-const fallBackAPISources = ["https://api.simplesvg.com", "https://api.unisvg.com"];
-const fallBackAPI = [];
-while (fallBackAPISources.length > 0) if (fallBackAPISources.length === 1) fallBackAPI.push(fallBackAPISources.shift());
-else if (Math.random() > 0.5) fallBackAPI.push(fallBackAPISources.shift());
-else fallBackAPI.push(fallBackAPISources.pop());
-configStorage[""] = createAPIConfig({ resources: ["https://api.iconify.design"].concat(fallBackAPI) });
-function addAPIProvider(provider, customConfig) {
-  const config = createAPIConfig(customConfig);
-  if (config === null) return false;
-  configStorage[provider] = config;
-  return true;
-}
-function getAPIConfig(provider) {
-  return configStorage[provider];
-}
-function listAPIProviders() {
-  return Object.keys(configStorage);
-}
-const detectFetch = () => {
-  let callback;
-  try {
-    callback = fetch;
-    if (typeof callback === "function") return callback;
-  } catch (err) {
-  }
-};
-let fetchModule = detectFetch();
-function setFetch(fetch2) {
-  fetchModule = fetch2;
-}
-function getFetch() {
-  return fetchModule;
-}
-function calculateMaxLength(provider, prefix) {
-  const config = getAPIConfig(provider);
-  if (!config) return 0;
-  let result;
-  if (!config.maxURL) result = 0;
-  else {
-    let maxHostLength = 0;
-    config.resources.forEach((item) => {
-      maxHostLength = Math.max(maxHostLength, item.length);
-    });
-    const url = prefix + ".json?icons=";
-    result = config.maxURL - maxHostLength - config.path.length - url.length;
-  }
-  return result;
-}
-function shouldAbort(status) {
-  return status === 404;
-}
-const prepare = (provider, prefix, icons) => {
-  const results = [];
-  const maxLength = calculateMaxLength(provider, prefix);
-  const type = "icons";
-  let item = {
-    type,
-    provider,
-    prefix,
-    icons: []
-  };
-  let length = 0;
-  icons.forEach((name, index) => {
-    length += name.length + 1;
-    if (length >= maxLength && index > 0) {
-      results.push(item);
-      item = {
-        type,
-        provider,
-        prefix,
-        icons: []
-      };
-      length = name.length;
-    }
-    item.icons.push(name);
-  });
-  results.push(item);
-  return results;
-};
-function getPath(provider) {
-  if (typeof provider === "string") {
-    const config = getAPIConfig(provider);
-    if (config) return config.path;
-  }
-  return "/";
-}
-const send = (host, params, callback) => {
-  if (!fetchModule) {
-    callback("abort", 424);
-    return;
-  }
-  let path = getPath(params.provider);
-  switch (params.type) {
-    case "icons": {
-      const prefix = params.prefix;
-      const iconsList = params.icons.join(",");
-      const urlParams = new URLSearchParams({ icons: iconsList });
-      path += prefix + ".json?" + urlParams.toString();
-      break;
-    }
-    case "custom": {
-      const uri = params.uri;
-      path += uri.slice(0, 1) === "/" ? uri.slice(1) : uri;
-      break;
-    }
-    default:
-      callback("abort", 400);
-      return;
-  }
-  let defaultError = 503;
-  fetchModule(host + path).then((response) => {
-    const status = response.status;
-    if (status !== 200) {
-      setTimeout(() => {
-        callback(shouldAbort(status) ? "abort" : "next", status);
-      });
-      return;
-    }
-    defaultError = 501;
-    return response.json();
-  }).then((data) => {
-    if (typeof data !== "object" || data === null) {
-      setTimeout(() => {
-        if (data === 404) callback("abort", data);
-        else callback("next", defaultError);
-      });
-      return;
-    }
-    setTimeout(() => {
-      callback("success", data);
-    });
-  }).catch(() => {
-    callback("next", defaultError);
-  });
-};
-const fetchAPIModule = {
-  prepare,
-  send
-};
-function removeCallback(storages, id) {
-  storages.forEach((storage2) => {
-    const items = storage2.loaderCallbacks;
-    if (items) storage2.loaderCallbacks = items.filter((row) => row.id !== id);
-  });
-}
-function updateCallbacks(storage2) {
-  if (!storage2.pendingCallbacksFlag) {
-    storage2.pendingCallbacksFlag = true;
-    setTimeout(() => {
-      storage2.pendingCallbacksFlag = false;
-      const items = storage2.loaderCallbacks ? storage2.loaderCallbacks.slice(0) : [];
-      if (!items.length) return;
-      let hasPending = false;
-      const provider = storage2.provider;
-      const prefix = storage2.prefix;
-      items.forEach((item) => {
-        const icons = item.icons;
-        const oldLength = icons.pending.length;
-        icons.pending = icons.pending.filter((icon) => {
-          if (icon.prefix !== prefix) return true;
-          const name = icon.name;
-          if (storage2.icons[name]) icons.loaded.push({
-            provider,
-            prefix,
-            name
-          });
-          else if (storage2.missing.has(name)) icons.missing.push({
-            provider,
-            prefix,
-            name
-          });
-          else {
-            hasPending = true;
-            return true;
-          }
-          return false;
-        });
-        if (icons.pending.length !== oldLength) {
-          if (!hasPending) removeCallback([storage2], item.id);
-          item.callback(icons.loaded.slice(0), icons.missing.slice(0), icons.pending.slice(0), item.abort);
-        }
-      });
-    });
-  }
-}
-let idCounter = 0;
-function storeCallback(callback, icons, pendingSources) {
-  const id = idCounter++;
-  const abort = removeCallback.bind(null, pendingSources, id);
-  if (!icons.pending.length) return abort;
-  const item = {
-    id,
-    icons,
-    callback,
-    abort
-  };
-  pendingSources.forEach((storage2) => {
-    (storage2.loaderCallbacks || (storage2.loaderCallbacks = [])).push(item);
-  });
-  return abort;
-}
-function sortIcons(icons) {
-  const result = {
-    loaded: [],
-    missing: [],
-    pending: []
-  };
-  const storage2 = /* @__PURE__ */ Object.create(null);
-  icons.sort((a, b) => {
-    if (a.provider !== b.provider) return a.provider.localeCompare(b.provider);
-    if (a.prefix !== b.prefix) return a.prefix.localeCompare(b.prefix);
-    return a.name.localeCompare(b.name);
-  });
-  let lastIcon = {
-    provider: "",
-    prefix: "",
-    name: ""
-  };
-  icons.forEach((icon) => {
-    if (lastIcon.name === icon.name && lastIcon.prefix === icon.prefix && lastIcon.provider === icon.provider) return;
-    lastIcon = icon;
-    const provider = icon.provider;
-    const prefix = icon.prefix;
-    const name = icon.name;
-    const providerStorage = storage2[provider] || (storage2[provider] = /* @__PURE__ */ Object.create(null));
-    const localStorage = providerStorage[prefix] || (providerStorage[prefix] = getStorage(provider, prefix));
-    let list;
-    if (name in localStorage.icons) list = result.loaded;
-    else if (prefix === "" || localStorage.missing.has(name)) list = result.missing;
-    else list = result.pending;
-    const item = {
-      provider,
-      prefix,
-      name
-    };
-    list.push(item);
-  });
-  return result;
-}
-function listToIcons(list, validate2 = true, simpleNames2 = false) {
-  const result = [];
-  list.forEach((item) => {
-    const icon = typeof item === "string" ? stringToIcon(item, validate2, simpleNames2) : item;
-    if (icon) result.push(icon);
-  });
-  return result;
-}
-const defaultConfig = {
-  resources: [],
-  index: 0,
-  timeout: 2e3,
-  rotate: 750,
-  random: false,
-  dataAfterTimeout: false
-};
-function sendQuery(config, payload, query, done) {
-  const resourcesCount = config.resources.length;
-  const startIndex = config.random ? Math.floor(Math.random() * resourcesCount) : config.index;
-  let resources;
-  if (config.random) {
-    let list = config.resources.slice(0);
-    resources = [];
-    while (list.length > 1) {
-      const nextIndex = Math.floor(Math.random() * list.length);
-      resources.push(list[nextIndex]);
-      list = list.slice(0, nextIndex).concat(list.slice(nextIndex + 1));
-    }
-    resources = resources.concat(list);
-  } else resources = config.resources.slice(startIndex).concat(config.resources.slice(0, startIndex));
-  const startTime = Date.now();
-  let status = "pending";
-  let queriesSent = 0;
-  let lastError;
-  let timer = null;
-  let queue = [];
-  let doneCallbacks = [];
-  if (typeof done === "function") doneCallbacks.push(done);
-  function resetTimer() {
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
-  }
-  function abort() {
-    if (status === "pending") status = "aborted";
-    resetTimer();
-    queue.forEach((item) => {
-      if (item.status === "pending") item.status = "aborted";
-    });
-    queue = [];
-  }
-  function subscribe(callback, overwrite) {
-    if (overwrite) doneCallbacks = [];
-    if (typeof callback === "function") doneCallbacks.push(callback);
-  }
-  function getQueryStatus() {
-    return {
-      startTime,
-      payload,
-      status,
-      queriesSent,
-      queriesPending: queue.length,
-      subscribe,
-      abort
-    };
-  }
-  function failQuery() {
-    status = "failed";
-    doneCallbacks.forEach((callback) => {
-      callback(void 0, lastError);
-    });
-  }
-  function clearQueue() {
-    queue.forEach((item) => {
-      if (item.status === "pending") item.status = "aborted";
-    });
-    queue = [];
-  }
-  function moduleResponse(item, response, data) {
-    const isError = response !== "success";
-    queue = queue.filter((queued) => queued !== item);
-    switch (status) {
-      case "pending":
-        break;
-      case "failed":
-        if (isError || !config.dataAfterTimeout) return;
-        break;
-      default:
-        return;
-    }
-    if (response === "abort") {
-      lastError = data;
-      failQuery();
-      return;
-    }
-    if (isError) {
-      lastError = data;
-      if (!queue.length) if (!resources.length) failQuery();
-      else execNext();
-      return;
-    }
-    resetTimer();
-    clearQueue();
-    if (!config.random) {
-      const index = config.resources.indexOf(item.resource);
-      if (index !== -1 && index !== config.index) config.index = index;
-    }
-    status = "completed";
-    doneCallbacks.forEach((callback) => {
-      callback(data);
-    });
-  }
-  function execNext() {
-    if (status !== "pending") return;
-    resetTimer();
-    const resource = resources.shift();
-    if (resource === void 0) {
-      if (queue.length) {
-        timer = setTimeout(() => {
-          resetTimer();
-          if (status === "pending") {
-            clearQueue();
-            failQuery();
-          }
-        }, config.timeout);
-        return;
-      }
-      failQuery();
-      return;
-    }
-    const item = {
-      status: "pending",
-      resource,
-      callback: (status2, data) => {
-        moduleResponse(item, status2, data);
-      }
-    };
-    queue.push(item);
-    queriesSent++;
-    timer = setTimeout(execNext, config.rotate);
-    query(resource, payload, item.callback);
-  }
-  setTimeout(execNext);
-  return getQueryStatus;
-}
-function initRedundancy(cfg) {
-  const config = {
-    ...defaultConfig,
-    ...cfg
-  };
-  let queries = [];
-  function cleanup() {
-    queries = queries.filter((item) => item().status === "pending");
-  }
-  function query(payload, queryCallback, doneCallback) {
-    const query2 = sendQuery(config, payload, queryCallback, (data, error) => {
-      cleanup();
-      if (doneCallback) doneCallback(data, error);
-    });
-    queries.push(query2);
-    return query2;
-  }
-  function find(callback) {
-    return queries.find((value) => {
-      return callback(value);
-    }) || null;
-  }
-  return {
-    query,
-    find,
-    setIndex: (index) => {
-      config.index = index;
-    },
-    getIndex: () => config.index,
-    cleanup
-  };
-}
-function emptyCallback$1() {
-}
-const redundancyCache = /* @__PURE__ */ Object.create(null);
-function getRedundancyCache(provider) {
-  if (!redundancyCache[provider]) {
-    const config = getAPIConfig(provider);
-    if (!config) return;
-    redundancyCache[provider] = {
-      config,
-      redundancy: initRedundancy(config)
-    };
-  }
-  return redundancyCache[provider];
-}
-function sendAPIQuery(target, query, callback) {
-  let redundancy;
-  let send2;
-  if (typeof target === "string") {
-    const api = getAPIModule(target);
-    if (!api) {
-      callback(void 0, 424);
-      return emptyCallback$1;
-    }
-    send2 = api.send;
-    const cached = getRedundancyCache(target);
-    if (cached) redundancy = cached.redundancy;
-  } else {
-    const config = createAPIConfig(target);
-    if (config) {
-      redundancy = initRedundancy(config);
-      const api = getAPIModule(target.resources ? target.resources[0] : "");
-      if (api) send2 = api.send;
-    }
-  }
-  if (!redundancy || !send2) {
-    callback(void 0, 424);
-    return emptyCallback$1;
-  }
-  return redundancy.query(query, send2, callback)().abort;
-}
-function emptyCallback() {
-}
-function loadedNewIcons(storage2) {
-  if (!storage2.iconsLoaderFlag) {
-    storage2.iconsLoaderFlag = true;
-    setTimeout(() => {
-      storage2.iconsLoaderFlag = false;
-      updateCallbacks(storage2);
-    });
-  }
-}
-function checkIconNamesForAPI(icons) {
-  const valid = [];
-  const invalid = [];
-  icons.forEach((name) => {
-    (name.match(matchIconName) ? valid : invalid).push(name);
-  });
-  return {
-    valid,
-    invalid
-  };
-}
-function parseLoaderResponse(storage2, icons, data) {
-  function checkMissing() {
-    const pending = storage2.pendingIcons;
-    icons.forEach((name) => {
-      if (pending) pending.delete(name);
-      if (!storage2.icons[name]) storage2.missing.add(name);
-    });
-  }
-  if (data && typeof data === "object") try {
-    if (!addIconSet(storage2, data).length) {
-      checkMissing();
-      return;
-    }
-  } catch (err) {
-    console.error(err);
-  }
-  checkMissing();
-  loadedNewIcons(storage2);
-}
-function parsePossiblyAsyncResponse(response, callback) {
-  if (response instanceof Promise) response.then((data) => {
-    callback(data);
-  }).catch(() => {
-    callback(null);
-  });
-  else callback(response);
-}
-function loadNewIcons(storage2, icons) {
-  if (!storage2.iconsToLoad) storage2.iconsToLoad = icons;
-  else storage2.iconsToLoad = storage2.iconsToLoad.concat(icons).sort();
-  if (!storage2.iconsQueueFlag) {
-    storage2.iconsQueueFlag = true;
-    setTimeout(() => {
-      storage2.iconsQueueFlag = false;
-      const { provider, prefix } = storage2;
-      const icons2 = storage2.iconsToLoad;
-      delete storage2.iconsToLoad;
-      if (!icons2 || !icons2.length) return;
-      const customIconLoader = storage2.loadIcon;
-      if (storage2.loadIcons && (icons2.length > 1 || !customIconLoader)) {
-        parsePossiblyAsyncResponse(storage2.loadIcons(icons2, prefix, provider), (data) => {
-          parseLoaderResponse(storage2, icons2, data);
-        });
-        return;
-      }
-      if (customIconLoader) {
-        icons2.forEach((name) => {
-          parsePossiblyAsyncResponse(customIconLoader(name, prefix, provider), (data) => {
-            parseLoaderResponse(storage2, [name], data ? {
-              prefix,
-              icons: { [name]: data }
-            } : null);
-          });
-        });
-        return;
-      }
-      const { valid, invalid } = checkIconNamesForAPI(icons2);
-      if (invalid.length) parseLoaderResponse(storage2, invalid, null);
-      if (!valid.length) return;
-      const api = prefix.match(matchIconName) ? getAPIModule(provider) : null;
-      if (!api) {
-        parseLoaderResponse(storage2, valid, null);
-        return;
-      }
-      api.prepare(provider, prefix, valid).forEach((item) => {
-        sendAPIQuery(provider, item, (data) => {
-          parseLoaderResponse(storage2, item.icons, data);
-        });
-      });
-    });
-  }
-}
-const loadIcons = (icons, callback) => {
-  const sortedIcons = sortIcons(listToIcons(icons, true, allowSimpleNames()));
-  if (!sortedIcons.pending.length) {
-    let callCallback = true;
-    if (callback) setTimeout(() => {
-      if (callCallback) callback(sortedIcons.loaded, sortedIcons.missing, sortedIcons.pending, emptyCallback);
-    });
-    return () => {
-      callCallback = false;
-    };
-  }
-  const newIcons = /* @__PURE__ */ Object.create(null);
-  const sources = [];
-  let lastProvider, lastPrefix;
-  sortedIcons.pending.forEach((icon) => {
-    const { provider, prefix } = icon;
-    if (prefix === lastPrefix && provider === lastProvider) return;
-    lastProvider = provider;
-    lastPrefix = prefix;
-    sources.push(getStorage(provider, prefix));
-    const providerNewIcons = newIcons[provider] || (newIcons[provider] = /* @__PURE__ */ Object.create(null));
-    if (!providerNewIcons[prefix]) providerNewIcons[prefix] = [];
-  });
-  sortedIcons.pending.forEach((icon) => {
-    const { provider, prefix, name } = icon;
-    const storage2 = getStorage(provider, prefix);
-    const pendingQueue = storage2.pendingIcons || (storage2.pendingIcons = /* @__PURE__ */ new Set());
-    if (!pendingQueue.has(name)) {
-      pendingQueue.add(name);
-      newIcons[provider][prefix].push(name);
-    }
-  });
-  sources.forEach((storage2) => {
-    const list = newIcons[storage2.provider][storage2.prefix];
-    if (list.length) loadNewIcons(storage2, list);
-  });
-  return callback ? storeCallback(callback, sortedIcons, sources) : emptyCallback;
-};
-const loadIcon = (icon) => {
-  return new Promise((fulfill, reject) => {
-    const iconObj = typeof icon === "string" ? stringToIcon(icon, true) : icon;
-    if (!iconObj) {
-      reject(icon);
-      return;
-    }
-    loadIcons([iconObj || icon], (loaded) => {
-      if (loaded.length && iconObj) {
-        const data = getIconData(iconObj);
-        if (data) {
-          fulfill({
-            ...defaultIconProps,
-            ...data
-          });
-          return;
-        }
-      }
-      reject(icon);
-    });
-  });
-};
-function setCustomIconsLoader(loader, prefix, provider) {
-  getStorage("", prefix).loadIcons = loader;
-}
-function mergeCustomisations(defaults, item) {
-  const result = { ...defaults };
-  for (const key in item) {
-    const value = item[key];
-    const valueType = typeof value;
-    if (key in defaultIconSizeCustomisations) {
-      if (value === null || value && (valueType === "string" || valueType === "number")) result[key] = value;
-    } else if (valueType === typeof result[key]) result[key] = key === "rotate" ? value % 4 : value;
-  }
-  return result;
-}
-const separator = /[\s,]+/;
-function flipFromString(custom, flip) {
-  flip.split(separator).forEach((str) => {
-    switch (str.trim()) {
-      case "horizontal":
-        custom.hFlip = true;
-        break;
-      case "vertical":
-        custom.vFlip = true;
-        break;
-    }
-  });
-}
-function rotateFromString(value, defaultValue = 0) {
-  const units = value.replace(/^-?[0-9.]*/, "");
-  function cleanup(value2) {
-    while (value2 < 0) value2 += 4;
-    return value2 % 4;
-  }
-  if (units === "") {
-    const num = parseInt(value);
-    return isNaN(num) ? 0 : cleanup(num);
-  } else if (units !== value) {
-    let split = 0;
-    switch (units) {
-      case "%":
-        split = 25;
-        break;
-      case "deg":
-        split = 90;
-    }
-    if (split) {
-      let num = parseFloat(value.slice(0, value.length - units.length));
-      if (isNaN(num)) return 0;
-      num = num / split;
-      return num % 1 === 0 ? cleanup(num) : 0;
-    }
-  }
-  return defaultValue;
-}
-function iconToHTML(body, attributes) {
-  let renderAttribsHTML = body.indexOf("xlink:") === -1 ? "" : ' xmlns:xlink="http://www.w3.org/1999/xlink"';
-  for (const attr in attributes) renderAttribsHTML += " " + attr + '="' + attributes[attr] + '"';
-  return '<svg xmlns="http://www.w3.org/2000/svg"' + renderAttribsHTML + ">" + body + "</svg>";
-}
-function encodeSVGforURL(svg) {
-  return svg.replace(/"/g, "'").replace(/%/g, "%25").replace(/#/g, "%23").replace(/</g, "%3C").replace(/>/g, "%3E").replace(/\s+/g, " ");
-}
-function svgToData(svg) {
-  return "data:image/svg+xml," + encodeSVGforURL(svg);
-}
-function svgToURL(svg) {
-  return 'url("' + svgToData(svg) + '")';
-}
-const defaultExtendedIconCustomisations = {
-  ...defaultIconCustomisations,
-  inline: false
-};
-const svgDefaults = {
-  "xmlns": "http://www.w3.org/2000/svg",
-  "xmlns:xlink": "http://www.w3.org/1999/xlink",
-  "aria-hidden": true,
-  "role": "img"
-};
-const commonProps = {
-  display: "inline-block"
-};
-const monotoneProps = {
-  backgroundColor: "currentColor"
-};
-const coloredProps = {
-  backgroundColor: "transparent"
-};
-const propsToAdd = {
-  Image: "var(--svg)",
-  Repeat: "no-repeat",
-  Size: "100% 100%"
-};
-const propsToAddTo = {
-  webkitMask: monotoneProps,
-  mask: monotoneProps,
-  background: coloredProps
-};
-for (const prefix in propsToAddTo) {
-  const list = propsToAddTo[prefix];
-  for (const prop in propsToAdd) {
-    list[prefix + prop] = propsToAdd[prop];
-  }
-}
-const customisationAliases = {};
-["horizontal", "vertical"].forEach((prefix) => {
-  const attr = prefix.slice(0, 1) + "Flip";
-  customisationAliases[prefix + "-flip"] = attr;
-  customisationAliases[prefix.slice(0, 1) + "-flip"] = attr;
-  customisationAliases[prefix + "Flip"] = attr;
-});
-function fixSize(value) {
-  return value + (value.match(/^[-0-9.]+$/) ? "px" : "");
-}
-const render = (icon, props) => {
-  const customisations = mergeCustomisations(defaultExtendedIconCustomisations, props);
-  const componentProps = { ...svgDefaults };
-  const mode = props.mode || "svg";
-  const style = {};
-  const propsStyle = props.style;
-  const customStyle = typeof propsStyle === "object" && !(propsStyle instanceof Array) ? propsStyle : {};
-  for (let key in props) {
-    const value = props[key];
-    if (value === void 0) {
-      continue;
-    }
-    switch (key) {
-      // Properties to ignore
-      case "icon":
-      case "style":
-      case "onLoad":
-      case "mode":
-      case "ssr":
-      case "customise":
-        break;
-      // Boolean attributes
-      case "inline":
-      case "hFlip":
-      case "vFlip":
-        customisations[key] = value === true || value === "true" || value === 1;
-        break;
-      // Flip as string: 'horizontal,vertical'
-      case "flip":
-        if (typeof value === "string") {
-          flipFromString(customisations, value);
-        }
-        break;
-      // Color: override style
-      case "color":
-        style.color = value;
-        break;
-      // Rotation as string
-      case "rotate":
-        if (typeof value === "string") {
-          customisations[key] = rotateFromString(value);
-        } else if (typeof value === "number") {
-          customisations[key] = value;
-        }
-        break;
-      // Remove aria-hidden
-      case "ariaHidden":
-      case "aria-hidden":
-        if (value !== true && value !== "true") {
-          delete componentProps["aria-hidden"];
-        }
-        break;
-      default: {
-        const alias = customisationAliases[key];
-        if (alias) {
-          if (value === true || value === "true" || value === 1) {
-            customisations[alias] = true;
-          }
-        } else if (defaultExtendedIconCustomisations[key] === void 0) {
-          componentProps[key] = value;
-        }
-      }
-    }
-  }
-  const item = iconToSVG(icon, customisations);
-  const renderAttribs = item.attributes;
-  if (customisations.inline) {
-    style.verticalAlign = "-0.125em";
-  }
-  if (mode === "svg") {
-    componentProps.style = {
-      ...style,
-      ...customStyle
-    };
-    Object.assign(componentProps, renderAttribs);
-    componentProps["innerHTML"] = replaceIDs(item.body);
-    return h("svg", componentProps);
-  }
-  const { body, width, height } = icon;
-  const useMask = mode === "mask" || (mode === "bg" ? false : body.indexOf("currentColor") !== -1);
-  const html = iconToHTML(body, {
-    ...renderAttribs,
-    width: width + "",
-    height: height + ""
-  });
-  componentProps.style = {
-    ...style,
-    "--svg": svgToURL(html),
-    "width": fixSize(renderAttribs.width),
-    "height": fixSize(renderAttribs.height),
-    ...commonProps,
-    ...useMask ? monotoneProps : coloredProps,
-    ...customStyle
-  };
-  return h("span", componentProps);
-};
-allowSimpleNames(true);
-setAPIModule("", fetchAPIModule);
-const emptyIcon = {
-  ...defaultIconProps,
-  body: ""
-};
-const Icon = defineComponent((props, { emit }) => {
-  const loader = ref(null);
-  function abortLoading() {
-    if (loader.value) {
-      loader.value.abort?.();
-      loader.value = null;
-    }
-  }
-  const rendering = ref(!!props.ssr);
-  const lastRenderedIconName = ref("");
-  const iconData = shallowRef(null);
-  function getIcon2() {
-    const icon = props.icon;
-    if (typeof icon === "object" && icon !== null && typeof icon.body === "string") {
-      lastRenderedIconName.value = "";
-      return {
-        data: icon
-      };
-    }
-    let iconName;
-    if (typeof icon !== "string" || (iconName = stringToIcon(icon, false, true)) === null) {
-      return null;
-    }
-    let data = getIconData(iconName);
-    if (!data) {
-      const oldState = loader.value;
-      if (!oldState || oldState.name !== icon) {
-        if (data === null) {
-          loader.value = {
-            name: icon
-          };
-        } else {
-          loader.value = {
-            name: icon,
-            abort: loadIcons([iconName], updateIconData)
-          };
-        }
-      }
-      return null;
-    }
-    abortLoading();
-    if (lastRenderedIconName.value !== icon) {
-      lastRenderedIconName.value = icon;
-      nextTick(() => {
-        emit("load", icon);
-      });
-    }
-    const customise = props.customise;
-    if (customise) {
-      data = Object.assign({}, data);
-      const customised = customise(data.body, iconName.name, iconName.prefix, iconName.provider);
-      if (typeof customised === "string") {
-        data.body = customised;
-      }
-    }
-    const classes = ["iconify"];
-    if (iconName.prefix !== "") {
-      classes.push("iconify--" + iconName.prefix);
-    }
-    if (iconName.provider !== "") {
-      classes.push("iconify--" + iconName.provider);
-    }
-    return { data, classes };
-  }
-  function updateIconData() {
-    const icon = getIcon2();
-    if (!icon) {
-      iconData.value = null;
-    } else if (icon.data !== iconData.value?.data) {
-      iconData.value = icon;
-    }
-  }
-  if (rendering.value) {
-    updateIconData();
-  }
-  watch(() => props.icon, updateIconData);
-  return () => {
-    const icon = iconData.value;
-    if (!icon) {
-      return render(emptyIcon, props);
-    }
-    let newProps = props;
-    if (icon.classes) {
-      newProps = {
-        ...props,
-        class: icon.classes.join(" ")
-      };
-    }
-    return render({
-      ...defaultIconProps,
-      ...icon.data
-    }, newProps);
-  };
-}, {
-  props: [
-    // Icon and render mode
-    "icon",
-    "mode",
-    "ssr",
-    // Layout and style
-    "width",
-    "height",
-    "style",
-    "color",
-    "inline",
-    // Transformations
-    "rotate",
-    "hFlip",
-    "horizontalFlip",
-    "vFlip",
-    "verticalFlip",
-    "flip",
-    // Misc
-    "id",
-    "ariaHidden",
-    "customise",
-    "title"
-  ],
-  emits: ["load"]
-});
-const _api = {
-  getAPIConfig,
-  setAPIModule,
-  sendAPIQuery,
-  setFetch,
-  getFetch,
-  listAPIProviders
-};
-const plugin_B8veUK2nN_PhQWjey1qGeZVAUSpYWweWEipPOzwHeQ8 = /* @__PURE__ */ defineNuxtPlugin({
-  name: "@nuxt/icon",
-  setup() {
-    const configs = /* @__PURE__ */ useRuntimeConfig();
-    const options = useAppConfig().icon;
-    _api.setFetch($fetch.native);
-    const resources = [];
-    if (options.provider === "server") {
-      const baseURL2 = configs.app?.baseURL?.replace(/\/$/, "") ?? "";
-      resources.push(baseURL2 + (options.localApiEndpoint || "/api/_nuxt_icon"));
-      if (options.fallbackToApi === true || options.fallbackToApi === "client-only") {
-        resources.push(options.iconifyApiEndpoint);
-      }
-    } else if (options.provider === "none") {
-      _api.setFetch(() => Promise.resolve(new Response()));
-    } else {
-      resources.push(options.iconifyApiEndpoint);
-    }
-    async function customIconLoader(icons, prefix) {
-      try {
-        const data = await $fetch(resources[0] + "/" + prefix + ".json", {
-          query: {
-            icons: icons.join(",")
-          }
-        });
-        if (!data || data.prefix !== prefix || !data.icons)
-          throw new Error("Invalid data" + JSON.stringify(data));
-        return data;
-      } catch (e) {
-        console.error("Failed to load custom icons", e);
-        return null;
-      }
-    }
-    addAPIProvider("", { resources });
-    for (const prefix of options.customCollections || []) {
-      if (prefix)
-        setCustomIconsLoader(customIconLoader, prefix);
-    }
-  }
-  // For type portability
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-});
-const LazyIcon = defineAsyncComponent(() => import('./index-ChAJFOYb.mjs').then((r) => r["default"] || r.default || r));
-const lazyGlobalComponents = [
-  ["Icon", LazyIcon]
-];
 const components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8 = /* @__PURE__ */ defineNuxtPlugin({
-  name: "nuxt:global-components",
-  setup(nuxtApp) {
-    for (const [name, component] of lazyGlobalComponents) {
-      nuxtApp.vueApp.component(name, component);
-      nuxtApp.vueApp.component("Lazy" + name, component);
-    }
-  }
-});
-const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
-function getColor(color, shade) {
-  if (color in colors && typeof colors[color] === "object" && shade in colors[color]) {
-    return colors[color][shade];
-  }
-  return "";
-}
-function generateShades(key, value, prefix) {
-  const prefixStr = prefix ? `${prefix}-` : "";
-  return `${shades.map((shade) => `--ui-color-${key}-${shade}: var(--${prefixStr}color-${value === "neutral" ? "old-neutral" : value}-${shade}, ${getColor(value, shade)});`).join("\n  ")}`;
-}
-function generateColor(key, shade) {
-  return `--ui-${key}: var(--ui-color-${key}-${shade});`;
-}
-const colors_99Q8v5p4LlHIs_iC3Ul0rQWK0ckKKMftbFtHre9MEIQ = /* @__PURE__ */ defineNuxtPlugin(() => {
-  const appConfig2 = useAppConfig();
-  useNuxtApp();
-  const root = computed(() => {
-    const { neutral, ...colors2 } = appConfig2.ui.colors;
-    const prefix = appConfig2.ui.prefix;
-    return `@layer theme {
-  :root, :host {
-  ${Object.entries(appConfig2.ui.colors).map(([key, value]) => generateShades(key, value, prefix)).join("\n  ")}
-  }
-  :root, :host, .light {
-  ${Object.keys(colors2).map((key) => generateColor(key, 500)).join("\n  ")}
-  }
-  .dark {
-  ${Object.keys(colors2).map((key) => generateColor(key, 400)).join("\n  ")}
-  }
-}`;
-  });
-  const headData = {
-    style: [{
-      innerHTML: root,
-      tagPriority: "critical",
-      id: "nuxt-ui-colors"
-    }]
-  };
-  useHead(headData);
+  name: "nuxt:global-components"
 });
 const plugins = [
   payloadPlugin,
@@ -5819,10 +4007,7 @@ const plugins = [
   plugin$1,
   revive_payload_server_yzgl96ydKFUsVPMowPDC68IjmWwYkdDIsK0pBkIU4KA,
   plugin,
-  plugin_server_Ns7Kxyh_4Fi2BbVy6T9WU8hHy_zYKd3cgoE6VA9fFBw,
-  plugin_B8veUK2nN_PhQWjey1qGeZVAUSpYWweWEipPOzwHeQ8,
-  components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8,
-  colors_99Q8v5p4LlHIs_iC3Ul0rQWK0ckKKMftbFtHre9MEIQ
+  components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8
 ];
 const defineRouteProvider = (name = "RouteProvider") => defineComponent({
   name,
@@ -5940,8 +4125,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-alYVr-UU.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-B9WzvMeh.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-Bz_Xzuk0.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-C49u4MG8.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -6033,5 +4218,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { Icon as I, _export_sfc as _, useRoute as a, useAppConfig as b, appConfig as c, useRoute$1 as d, entry_default as default, useNuxtApp as e, useState as f, useRouter as g, encodeRoutePath as h, useRuntimeConfig as i, nuxtLinkDefaults as j, getIcon as k, loadIcon as l, useAsyncData as m, navigateTo as n, pinia_prodExports as p, resolveRouteObject as r, useHead as u };
+export { _export_sfc as _, useRoute as a, useRouter as b, useRuntimeConfig as c, nuxtLinkDefaults as d, entry_default as default, encodeRoutePath as e, navigateTo as n, pinia_prodExports as p, resolveRouteObject as r, useNuxtApp as u };
 //# sourceMappingURL=server.mjs.map

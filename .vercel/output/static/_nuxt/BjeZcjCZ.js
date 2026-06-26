@@ -1,1 +1,0 @@
-import{e as r,a9 as u,l as t,o as a,c,R as m}from"./DnSN91RH.js";const g=r({__name:"LogoutButton",setup(p){const{user:n,logout:o}=u();return(l,e)=>t(n)?(a(),c("button",{key:0,onClick:e[0]||(e[0]=(...s)=>t(o)&&t(o)(...s)),class:"rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"}," Logout ")):m("",!0)}}),i=Object.assign(g,{__name:"LogoutButton"});export{i as L};

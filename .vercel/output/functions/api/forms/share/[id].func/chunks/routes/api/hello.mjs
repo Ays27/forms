@@ -3,11 +3,9 @@ import 'node:http';
 import 'node:https';
 import 'node:events';
 import 'node:buffer';
-import '@iconify/utils';
-import 'node:crypto';
-import 'consola';
 import 'node:fs';
 import 'node:path';
+import 'node:crypto';
 
 const hello = defineEventHandler(() => {
   return { hello: "world" };

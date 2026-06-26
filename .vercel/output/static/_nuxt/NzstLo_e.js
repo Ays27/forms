@@ -1,0 +1,1 @@
+import{g as r,N as u,n as t,o as a,c,x as g}from"./rRo18Ynz.js";const m=r({__name:"LogoutButton",setup(p){const{user:n,logout:o}=u();return(_,e)=>t(n)?(a(),c("button",{key:0,onClick:e[0]||(e[0]=(...s)=>t(o)&&t(o)(...s)),class:"rounded-lg bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"}," Logout ")):g("",!0)}}),l=Object.assign(m,{__name:"LogoutButton"});export{l as L};

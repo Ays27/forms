@@ -1,5 +1,5 @@
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'vue-bundle-renderer/runtime';
-import { b as buildAssetsURL, e as publicAssetsURL, f as useRuntimeConfig, h as getResponseStatusText, i as getResponseStatus, j as encodePath, k as defineRenderHandler, l as getQuery, c as createError, m as destr, n as getRouteRules, o as joinURL, u as useNitroApp } from '../_/nitro.mjs';
+import { j as joinRelativeURL, b as useRuntimeConfig, e as getResponseStatusText, f as getResponseStatus, h as encodePath, i as defineRenderHandler, k as getQuery, c as createError, l as destr, m as getRouteRules, n as joinURL, u as useNitroApp } from '../_/nitro.mjs';
 import { renderToString } from 'vue/server-renderer';
 import { createHead as createHead$1, propsToString, renderSSRHead } from 'unhead/server';
 import { stringify, uneval } from 'devalue';
@@ -80,7 +80,7 @@ const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initi
 
 const appRootTag = "div";
 
-const appRootAttrs = {"id":"__nuxt","class":"isolate"};
+const appRootAttrs = {"id":"__nuxt"};
 
 const appTeleportTag = "div";
 
@@ -91,6 +91,24 @@ const appSpaLoaderTag = "div";
 const appSpaLoaderAttrs = {"id":"__nuxt-loader"};
 
 const appId = "nuxt-app";
+
+function baseURL() {
+	
+	return useRuntimeConfig().app.baseURL;
+}
+function buildAssetsDir() {
+	
+	return useRuntimeConfig().app.buildAssetsDir;
+}
+function buildAssetsURL(...path) {
+	return joinRelativeURL(publicAssetsURL(), buildAssetsDir(), ...path);
+}
+function publicAssetsURL(...path) {
+	
+	const app = useRuntimeConfig().app;
+	const publicBase = app.cdnURL || app.baseURL;
+	return path.length ? joinRelativeURL(publicBase, ...path) : publicBase;
+}
 
 // @ts-expect-error private property consumed by vite-generated url helpers
 globalThis.__buildAssetsURL = buildAssetsURL;
@@ -490,5 +508,5 @@ const renderer = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   default: handler
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { headSymbol as h, renderer as r, useHead as u };
+export { baseURL as b, headSymbol as h, renderer as r, useHead as u };
 //# sourceMappingURL=renderer.mjs.map

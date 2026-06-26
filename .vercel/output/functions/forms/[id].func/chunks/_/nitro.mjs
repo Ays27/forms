@@ -2,11 +2,9 @@ import http from 'node:http';
 import https from 'node:https';
 import { EventEmitter } from 'node:events';
 import { Buffer as Buffer$1 } from 'node:buffer';
-import { getIcons } from '@iconify/utils';
-import { createHash } from 'node:crypto';
-import { consola } from 'consola';
 import { promises, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
+import { createHash } from 'node:crypto';
 
 const suspectProtoRx = /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/;
 const suspectConstructorRx = /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/;
@@ -2583,11 +2581,11 @@ function createNodeFetch() {
     return l(input, { ...nodeFetchOptions, ...init });
   };
 }
-const fetch$1 = globalThis.fetch ? (...args) => globalThis.fetch(...args) : createNodeFetch();
+const fetch = globalThis.fetch ? (...args) => globalThis.fetch(...args) : createNodeFetch();
 const Headers$1 = globalThis.Headers || s$1;
 const AbortController = globalThis.AbortController || i;
-const ofetch = createFetch({ fetch: fetch$1, Headers: Headers$1, AbortController });
-const $fetch$1 = ofetch;
+const ofetch = createFetch({ fetch, Headers: Headers$1, AbortController });
+const $fetch = ofetch;
 
 function wrapToPromise(value) {
   if (!value || typeof value.then !== "function") {
@@ -3982,303 +3980,7 @@ function klona(x) {
 }
 
 const inlineAppConfig = {
-  "nuxt": {},
-  "ui": {
-    "colors": {
-      "primary": "green",
-      "secondary": "blue",
-      "success": "green",
-      "info": "blue",
-      "warning": "yellow",
-      "error": "red",
-      "neutral": "slate"
-    },
-    "icons": {
-      "arrowDown": "i-lucide-arrow-down",
-      "arrowLeft": "i-lucide-arrow-left",
-      "arrowRight": "i-lucide-arrow-right",
-      "arrowUp": "i-lucide-arrow-up",
-      "caution": "i-lucide-circle-alert",
-      "check": "i-lucide-check",
-      "chevronDoubleLeft": "i-lucide-chevrons-left",
-      "chevronDoubleRight": "i-lucide-chevrons-right",
-      "chevronDown": "i-lucide-chevron-down",
-      "chevronLeft": "i-lucide-chevron-left",
-      "chevronRight": "i-lucide-chevron-right",
-      "chevronUp": "i-lucide-chevron-up",
-      "close": "i-lucide-x",
-      "copy": "i-lucide-copy",
-      "copyCheck": "i-lucide-copy-check",
-      "dark": "i-lucide-moon",
-      "drag": "i-lucide-grip-vertical",
-      "ellipsis": "i-lucide-ellipsis",
-      "error": "i-lucide-circle-x",
-      "external": "i-lucide-arrow-up-right",
-      "eye": "i-lucide-eye",
-      "eyeOff": "i-lucide-eye-off",
-      "file": "i-lucide-file",
-      "folder": "i-lucide-folder",
-      "folderOpen": "i-lucide-folder-open",
-      "hash": "i-lucide-hash",
-      "info": "i-lucide-info",
-      "light": "i-lucide-sun",
-      "loading": "i-lucide-loader-circle",
-      "menu": "i-lucide-menu",
-      "minus": "i-lucide-minus",
-      "panelClose": "i-lucide-panel-left-close",
-      "panelOpen": "i-lucide-panel-left-open",
-      "plus": "i-lucide-plus",
-      "reload": "i-lucide-rotate-ccw",
-      "search": "i-lucide-search",
-      "stop": "i-lucide-square",
-      "success": "i-lucide-circle-check",
-      "system": "i-lucide-monitor",
-      "tip": "i-lucide-lightbulb",
-      "upload": "i-lucide-upload",
-      "warning": "i-lucide-triangle-alert"
-    },
-    "tv": {
-      "twMergeConfig": {}
-    }
-  },
-  "icon": {
-    "provider": "server",
-    "class": "",
-    "aliases": {},
-    "iconifyApiEndpoint": "https://api.iconify.design",
-    "localApiEndpoint": "/api/_nuxt_icon",
-    "fallbackToApi": true,
-    "cssSelectorPrefix": "i-",
-    "cssWherePseudo": true,
-    "cssLayer": "base",
-    "mode": "css",
-    "attrs": {
-      "aria-hidden": true
-    },
-    "collections": [
-      "academicons",
-      "akar-icons",
-      "ant-design",
-      "arcticons",
-      "basil",
-      "bi",
-      "bitcoin-icons",
-      "bpmn",
-      "brandico",
-      "bx",
-      "bxl",
-      "bxs",
-      "bytesize",
-      "carbon",
-      "catppuccin",
-      "cbi",
-      "charm",
-      "ci",
-      "cib",
-      "cif",
-      "cil",
-      "circle-flags",
-      "circum",
-      "clarity",
-      "codex",
-      "codicon",
-      "covid",
-      "cryptocurrency",
-      "cryptocurrency-color",
-      "cuida",
-      "dashicons",
-      "devicon",
-      "devicon-plain",
-      "dinkie-icons",
-      "duo-icons",
-      "ei",
-      "el",
-      "emojione",
-      "emojione-monotone",
-      "emojione-v1",
-      "entypo",
-      "entypo-social",
-      "eos-icons",
-      "ep",
-      "et",
-      "eva",
-      "f7",
-      "fa",
-      "fa-brands",
-      "fa-regular",
-      "fa-solid",
-      "fa6-brands",
-      "fa6-regular",
-      "fa6-solid",
-      "fa7-brands",
-      "fa7-regular",
-      "fa7-solid",
-      "fad",
-      "famicons",
-      "fe",
-      "feather",
-      "file-icons",
-      "flag",
-      "flagpack",
-      "flat-color-icons",
-      "flat-ui",
-      "flowbite",
-      "fluent",
-      "fluent-color",
-      "fluent-emoji",
-      "fluent-emoji-flat",
-      "fluent-emoji-high-contrast",
-      "fluent-mdl2",
-      "fontelico",
-      "fontisto",
-      "formkit",
-      "foundation",
-      "fxemoji",
-      "gala",
-      "game-icons",
-      "garden",
-      "geo",
-      "gg",
-      "gis",
-      "gravity-ui",
-      "gridicons",
-      "grommet-icons",
-      "guidance",
-      "healthicons",
-      "heroicons",
-      "heroicons-outline",
-      "heroicons-solid",
-      "hugeicons",
-      "humbleicons",
-      "ic",
-      "icomoon-free",
-      "icon-park",
-      "icon-park-outline",
-      "icon-park-solid",
-      "icon-park-twotone",
-      "iconamoon",
-      "iconoir",
-      "icons8",
-      "il",
-      "ion",
-      "iwwa",
-      "ix",
-      "jam",
-      "la",
-      "lets-icons",
-      "line-md",
-      "lineicons",
-      "logos",
-      "ls",
-      "lsicon",
-      "lucide",
-      "lucide-lab",
-      "mage",
-      "majesticons",
-      "maki",
-      "map",
-      "marketeq",
-      "material-icon-theme",
-      "material-symbols",
-      "material-symbols-light",
-      "mdi",
-      "mdi-light",
-      "medical-icon",
-      "memory",
-      "meteocons",
-      "meteor-icons",
-      "mi",
-      "mingcute",
-      "mono-icons",
-      "mynaui",
-      "nimbus",
-      "nonicons",
-      "noto",
-      "noto-v1",
-      "nrk",
-      "octicon",
-      "oi",
-      "ooui",
-      "openmoji",
-      "oui",
-      "pajamas",
-      "pepicons",
-      "pepicons-pencil",
-      "pepicons-pop",
-      "pepicons-print",
-      "ph",
-      "picon",
-      "pixel",
-      "pixelarticons",
-      "prime",
-      "proicons",
-      "ps",
-      "qlementine-icons",
-      "quill",
-      "radix-icons",
-      "raphael",
-      "ri",
-      "rivet-icons",
-      "roentgen",
-      "si",
-      "si-glyph",
-      "sidekickicons",
-      "simple-icons",
-      "simple-line-icons",
-      "skill-icons",
-      "solar",
-      "stash",
-      "streamline",
-      "streamline-block",
-      "streamline-color",
-      "streamline-cyber",
-      "streamline-cyber-color",
-      "streamline-emojis",
-      "streamline-flex",
-      "streamline-flex-color",
-      "streamline-freehand",
-      "streamline-freehand-color",
-      "streamline-kameleon-color",
-      "streamline-logos",
-      "streamline-pixel",
-      "streamline-plump",
-      "streamline-plump-color",
-      "streamline-sharp",
-      "streamline-sharp-color",
-      "streamline-stickies-color",
-      "streamline-ultimate",
-      "streamline-ultimate-color",
-      "subway",
-      "svg-spinners",
-      "system-uicons",
-      "tabler",
-      "tdesign",
-      "teenyicons",
-      "temaki",
-      "token",
-      "token-branded",
-      "topcoat",
-      "twemoji",
-      "typcn",
-      "uil",
-      "uim",
-      "uis",
-      "uit",
-      "uiw",
-      "unjs",
-      "vaadin",
-      "vs",
-      "vscode-icons",
-      "websymbol",
-      "weui",
-      "whh",
-      "wi",
-      "wpf",
-      "zmdi",
-      "zondicons"
-    ],
-    "fetchTimeout": 1500
-  }
+  "nuxt": {}
 };
 
 
@@ -4381,7 +4083,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "4d8ac166-4ddf-4a39-963e-f4c9d6fe4e0b",
+    "buildId": "90c079f7-427a-4e62-804e-e71ea7d9ef95",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4402,11 +4104,6 @@ const _inlineRuntimeConfig = {
           "cache-control": "public, max-age=1, immutable"
         }
       },
-      "/_fonts/**": {
-        "headers": {
-          "cache-control": "public, max-age=31536000, immutable"
-        }
-      },
       "/_nuxt/**": {
         "headers": {
           "cache-control": "public, max-age=31536000, immutable"
@@ -4414,10 +4111,7 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {},
-  "icon": {
-    "serverKnownCssClasses": []
-  }
+  "public": {}
 };
 const envOptions = {
   prefix: "NITRO_",
@@ -4439,12 +4133,7 @@ function useRuntimeConfig(event) {
   event.context.nitro.runtimeConfig = runtimeConfig;
   return runtimeConfig;
 }
-const _sharedAppConfig = _deepFreeze(klona(appConfig));
-function useAppConfig(event) {
-  {
-    return _sharedAppConfig;
-  }
-}
+_deepFreeze(klona(appConfig));
 function _deepFreeze(object) {
   const propNames = Object.getOwnPropertyNames(object);
   for (const name of propNames) {
@@ -4848,150 +4537,11 @@ async function errorHandler(error, event) {
   // H3 will handle fallback
 }
 
-const script = "\"use strict\";(()=>{const t=window,e=document.documentElement,c=[\"dark\",\"light\"],n=getStorageValue(\"localStorage\",\"nuxt-color-mode\")||\"system\";let i=n===\"system\"?u():n;const r=e.getAttribute(\"data-color-mode-forced\");r&&(i=r),l(i),t[\"__NUXT_COLOR_MODE__\"]={preference:n,value:i,getColorScheme:u,addColorScheme:l,removeColorScheme:d};function l(o){const s=\"\"+o+\"\",a=\"\";e.classList?e.classList.add(s):e.className+=\" \"+s,a&&e.setAttribute(\"data-\"+a,o)}function d(o){const s=\"\"+o+\"\",a=\"\";e.classList?e.classList.remove(s):e.className=e.className.replace(new RegExp(s,\"g\"),\"\"),a&&e.removeAttribute(\"data-\"+a)}function f(o){return t.matchMedia(\"(prefers-color-scheme\"+o+\")\")}function u(){if(t.matchMedia&&f(\"\").media!==\"not all\"){for(const o of c)if(f(\":\"+o).matches)return o}return\"light\"}})();function getStorageValue(t,e){switch(t){case\"localStorage\":return window.localStorage.getItem(e);case\"sessionStorage\":return window.sessionStorage.getItem(e);case\"cookie\":return getCookie(e);default:return null}}function getCookie(t){const c=(\"; \"+window.document.cookie).split(\"; \"+t+\"=\");if(c.length===2)return c.pop()?.split(\";\").shift()}";
-
-const _gzD3fvKaRmAAlx26r41D65XbJabZzjgnrF_iFjK6WE = (function(nitro) {
-  nitro.hooks.hook("render:html", (htmlContext) => {
-    htmlContext.head.push(`<script>${script}<\/script>`);
-  });
-});
-
 const plugins = [
-  _gzD3fvKaRmAAlx26r41D65XbJabZzjgnrF_iFjK6WE
+  
 ];
 
 const _SxA8c9 = defineEventHandler(() => {});
-
-const _DRIVE_LETTER_START_RE = /^[A-Za-z]:\//;
-function normalizeWindowsPath(input = "") {
-  if (!input) {
-    return input;
-  }
-  return input.replace(/\\/g, "/").replace(_DRIVE_LETTER_START_RE, (r) => r.toUpperCase());
-}
-const basename = function(p, extension) {
-  const segments = normalizeWindowsPath(p).split("/");
-  let lastSegment = "";
-  for (let i = segments.length - 1; i >= 0; i--) {
-    const val = segments[i];
-    if (val) {
-      lastSegment = val;
-      break;
-    }
-  }
-  return extension && lastSegment.endsWith(extension) ? lastSegment.slice(0, -extension.length) : lastSegment;
-};
-
-function defineRenderHandler(render) {
-  const runtimeConfig = useRuntimeConfig();
-  return eventHandler(async (event) => {
-    const nitroApp = useNitroApp();
-    const ctx = { event, render, response: void 0 };
-    await nitroApp.hooks.callHook("render:before", ctx);
-    if (!ctx.response) {
-      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
-        setResponseHeader(event, "Content-Type", "image/x-icon");
-        return send(
-          event,
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-        );
-      }
-      ctx.response = await ctx.render(event);
-      if (!ctx.response) {
-        const _currentStatus = getResponseStatus(event);
-        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
-        return send(
-          event,
-          "No response returned from render handler: " + event.path
-        );
-      }
-    }
-    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
-    if (ctx.response.headers) {
-      setResponseHeaders(event, ctx.response.headers);
-    }
-    if (ctx.response.statusCode || ctx.response.statusMessage) {
-      setResponseStatus(
-        event,
-        ctx.response.statusCode,
-        ctx.response.statusMessage
-      );
-    }
-    return ctx.response.body;
-  });
-}
-
-function baseURL() {
-	
-	return useRuntimeConfig().app.baseURL;
-}
-function buildAssetsDir() {
-	
-	return useRuntimeConfig().app.buildAssetsDir;
-}
-function buildAssetsURL(...path) {
-	return joinRelativeURL(publicAssetsURL(), buildAssetsDir(), ...path);
-}
-function publicAssetsURL(...path) {
-	
-	const app = useRuntimeConfig().app;
-	const publicBase = app.cdnURL || app.baseURL;
-	return path.length ? joinRelativeURL(publicBase, ...path) : publicBase;
-}
-
-const collections = {
-};
-
-const DEFAULT_ENDPOINT = "https://api.iconify.design";
-const _r65MkW = defineCachedEventHandler(async (event) => {
-  const url = getRequestURL(event);
-  if (!url)
-    return createError$1({ status: 400, message: "Invalid icon request" });
-  const options = useAppConfig().icon;
-  const collectionName = event.context.params?.collection?.replace(/\.json$/, "");
-  const collection = collectionName ? await collections[collectionName]?.() : null;
-  const apiEndPoint = options.iconifyApiEndpoint || DEFAULT_ENDPOINT;
-  const icons = url.searchParams.get("icons")?.split(",");
-  if (collection) {
-    if (icons?.length) {
-      const data = getIcons(
-        collection,
-        icons
-      );
-      consola.debug(`[Icon] serving ${(icons || []).map((i) => "`" + collectionName + ":" + i + "`").join(",")} from bundled collection`);
-      return data;
-    }
-  }
-  if (options.fallbackToApi === true || options.fallbackToApi === "server-only") {
-    const apiUrl = new URL("./" + basename(url.pathname) + url.search, apiEndPoint);
-    consola.debug(`[Icon] fetching ${(icons || []).map((i) => "`" + collectionName + ":" + i + "`").join(",")} from iconify api`);
-    if (apiUrl.host !== new URL(apiEndPoint).host) {
-      return createError$1({ status: 400, message: "Invalid icon request" });
-    }
-    try {
-      const data = await $fetch(apiUrl.href);
-      return data;
-    } catch (e) {
-      consola.error(e);
-      if (e.status === 404)
-        return createError$1({ status: 404 });
-      else
-        return createError$1({ status: 500, message: "Failed to fetch fallback icon" });
-    }
-  }
-  return createError$1({ status: 404 });
-}, {
-  group: "nuxt",
-  name: "icon",
-  getKey(event) {
-    const collection = event.context.params?.collection?.replace(/\.json$/, "") || "unknown";
-    const icons = String(getQuery(event).icons || "");
-    return `${collection}_${icons.split(",")[0]}_${icons.length}_${hash$1(icons)}`;
-  },
-  swr: true,
-  maxAge: 60 * 60 * 24 * 7
-  // 1 week
-});
 
 const _lazy_eBjRO5 = () => import('../routes/api/auth/_..._.mjs');
 const _lazy_3IiHfP = () => import('../routes/api/auth/hello.mjs');
@@ -5018,7 +4568,6 @@ const handlers = [
   { route: '/api/responses', handler: _lazy_a_Yn0P, lazy: true, middleware: false, method: "post" },
   { route: '/__nuxt_error', handler: _lazy_uDoMJA, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/api/_nuxt_icon/:collection', handler: _r65MkW, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_uDoMJA, lazy: true, middleware: false, method: undefined }
 ];
 
@@ -5163,5 +4712,44 @@ function useNitroApp() {
 }
 runNitroPlugins(nitroApp);
 
-export { $fetch$1 as $, sanitizeStatusCode as A, getContext as B, baseURL as C, hash$1 as D, executeAsync as E, defu as F, withTrailingSlash as G, withoutTrailingSlash as H, toWebRequest as a, buildAssetsURL as b, createError$1 as c, defineEventHandler as d, publicAssetsURL as e, useRuntimeConfig as f, getRouteRulesForPath as g, getResponseStatusText as h, getResponseStatus as i, encodePath as j, defineRenderHandler as k, getQuery as l, destr as m, getRouteRules as n, joinURL as o, parseQuery as p, klona as q, readBody as r, defuFn as s, toNodeListener as t, useNitroApp as u, parseURL as v, withQuery as w, decodePath as x, hasProtocol as y, isScriptProtocol as z };
+function defineRenderHandler(render) {
+  const runtimeConfig = useRuntimeConfig();
+  return eventHandler(async (event) => {
+    const nitroApp = useNitroApp();
+    const ctx = { event, render, response: void 0 };
+    await nitroApp.hooks.callHook("render:before", ctx);
+    if (!ctx.response) {
+      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
+        setResponseHeader(event, "Content-Type", "image/x-icon");
+        return send(
+          event,
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        );
+      }
+      ctx.response = await ctx.render(event);
+      if (!ctx.response) {
+        const _currentStatus = getResponseStatus(event);
+        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
+        return send(
+          event,
+          "No response returned from render handler: " + event.path
+        );
+      }
+    }
+    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
+    if (ctx.response.headers) {
+      setResponseHeaders(event, ctx.response.headers);
+    }
+    if (ctx.response.statusCode || ctx.response.statusMessage) {
+      setResponseStatus(
+        event,
+        ctx.response.statusCode,
+        ctx.response.statusMessage
+      );
+    }
+    return ctx.response.body;
+  });
+}
+
+export { $fetch as $, hash$1 as A, defu as B, withTrailingSlash as C, withoutTrailingSlash as D, toWebRequest as a, useRuntimeConfig as b, createError$1 as c, defineEventHandler as d, getResponseStatusText as e, getResponseStatus as f, getRouteRulesForPath as g, encodePath as h, defineRenderHandler as i, joinRelativeURL as j, getQuery as k, destr as l, getRouteRules as m, joinURL as n, parseURL as o, parseQuery as p, decodePath as q, readBody as r, hasProtocol as s, toNodeListener as t, useNitroApp as u, isScriptProtocol as v, withQuery as w, sanitizeStatusCode as x, getContext as y, executeAsync as z };
 //# sourceMappingURL=nitro.mjs.map
