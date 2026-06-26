@@ -35,3 +35,4 @@ export { useMedia } from '../app/composables/useMedia';
 export { useSession } from '../app/composables/useSession';
 export { useFormStore } from '../app/stores/form';
 export { defineStore, acceptHMRUpdate, usePinia, storeToRefs } from '../node_modules/.pnpm/@pinia+nuxt@0.11.3_magicast_58297e933b6648842b3cde4eaaa6443d/node_modules/@pinia/nuxt/dist/runtime/composables';
+export { useNuxtDevTools } from '../node_modules/.pnpm/@nuxt+devtools@3.2.4_vite@7_99a3c42abec1cc5a7b36a9635aaf0c78/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';

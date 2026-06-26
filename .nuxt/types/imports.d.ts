@@ -121,6 +121,7 @@ declare global {
   const useModel: typeof import('vue').useModel
   const useNuxtApp: typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/nuxt').useNuxtApp
   const useNuxtData: typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/composables/asyncData').useNuxtData
+  const useNuxtDevTools: typeof import('../../node_modules/.pnpm/@nuxt+devtools@3.2.4_vite@7_99a3c42abec1cc5a7b36a9635aaf0c78/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools').useNuxtDevTools
   const usePinia: typeof import('../../node_modules/.pnpm/@pinia+nuxt@0.11.3_magicast_58297e933b6648842b3cde4eaaa6443d/node_modules/@pinia/nuxt/dist/runtime/composables').usePinia
   const usePreviewMode: typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/composables/preview').usePreviewMode
   const useRequestEvent: typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/composables/ssr').useRequestEvent
@@ -326,6 +327,7 @@ declare module 'vue' {
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useNuxtApp: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/nuxt')['useNuxtApp']>
     readonly useNuxtData: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/composables/asyncData')['useNuxtData']>
+    readonly useNuxtDevTools: UnwrapRef<typeof import('../../node_modules/.pnpm/@nuxt+devtools@3.2.4_vite@7_99a3c42abec1cc5a7b36a9635aaf0c78/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']>
     readonly usePinia: UnwrapRef<typeof import('../../node_modules/.pnpm/@pinia+nuxt@0.11.3_magicast_58297e933b6648842b3cde4eaaa6443d/node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']>
     readonly usePreviewMode: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/composables/preview')['usePreviewMode']>
     readonly useRequestEvent: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@4.4.4_@babel+core@7.29_50511366d20ae63ede64306d9cb00d5d/node_modules/nuxt/dist/app/composables/ssr')['useRequestEvent']>
